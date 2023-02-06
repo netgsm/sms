@@ -1,0 +1,295 @@
+
+
+
+# Netgsm Sms Laravel Paketi
+
+Netgsm Sms paket aboneliği bulunan kullanıcılarımız için laravel paketidir.
+
+### Kurulum
+
+composer require netgsm/smssend  
+
+.env  dosyası içerisinde NETGSM ABONELİK bilgileriniz tanımlanması zorunludur.  
+
+<b>NETGSM_USERCODE=""</b>  
+<b>NETGSM_PASSWORD=""</b>  
+<b>NETGSM_HEADER=""</b>  
+
+## PARAMETRELER
+
+<table width="300">
+  <th>Parametre</th>
+  <th>Anlamı</th>
+  <tr>
+    <td><b> encoding</b> </td>
+    <td> Türkçe karakter desteği isteniyorsa bu alana TR girilmeli, istenmiyorsa null olarak gönderilmelidir. SMS boyu hesabı ve ücretlendirme bu parametreye bağlı olarak değişecektir. </td>
+    
+  </tr>
+  <tr>
+    <td><b> startdate</b> </td>
+    <td> Gönderime başlayacağınız tarih. (ddMMyyyyHHmm) * Boş bırakılırsa mesajınız hemen gider.  </td>
+  </tr>
+  <tr>
+    <td><b> stopdate</b> </td>
+    <td>İki tarih arası gönderimlerinizde bitiş tarihi.(ddMMyyyyHHmm)* Boş bırakılırsa sistem başlangıç tarihine 21 saat ekleyerek otomatik gönderir.  </td>
+  </tr>
+  <tr>
+    <td><b> bayikodu </b> </td>
+    <td> Bayi üyesi iseniz bayinize ait kod   </td>
+  </tr>
+  <tr>
+    <td><b> filter </b> </td>
+    <td> Ticari içerikli SMS gönderimlerinde bu parametreyi kullanabilirsiniz. Ticari içerikli bireysele gönderilecek numaralar için İYS kontrollü gönderimlerde ise "11" değerini, tacire gönderilecek İYS kontrollü gönderimlerde ise "12" değerini almalıdır. null gönderildiği taktirde filtre uygulanmadan gönderilecektir.İstek yapılırken gönderilmesi zorunludur. Ticari içerikli ileti gönderimi yapmıyorsanız 0 gönderilmelidir.    </td>
+  </tr>
+  <tr>
+    <td><b> appkey </b> </td>
+    <td> Geliştirici hesabınızdan yayınlanan uygulamanıza ait id bilgisi.    </td>
+  </tr>
+  <tr>
+    <td><b> bulkid </b> </td>
+    <td> başarılı mesaj gönderimlerinizde dönen görevid (bulkid) nizdir.    </td>
+  </tr>
+  
+</table> 
+
+### 1:n SMS GÖNDERİMİ
+
+SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde iletebilirsiniz.
+
+```
+        use Netgsm\Sms\SmsSend;
+        $data['message']='test';
+        $data['no']=['553xxxxxxx']; //$data['gsm']=['553xxxxxxx','555xxxxxxx']	
+        $data['filter']=0;
+        // $data['encoding']='tr';
+        //$data['startdate']='200120231600';
+        //$data['stopdate']='200120231700';
+        //$data['bayikodu']=1312;
+        //$data['appkey']='A123-F3DASD-XXXXX....';
+        
+        $sms= new SmsSend;
+        $cevap=$sms->smsGonder($data);
+        
+        echo '<pre>';
+          print_r($cevap);
+        echo '<pre>';
+```
+### n:n SMS GÖNDERİMİ
+
+Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette gönderebilirsiniz. 
+
+```
+        use Netgsm\Sms\SmsSend;
+        $msGsm[0]['gsm']='553XXXXXXX';
+        $msGsm[0]['message']='MESAJ METNİ 1';
+        $msGsm[1]['gsm']='553XXXXXXX';
+        $msGsm[1]['message']='MESAJ METNİ 2';
+        $data['startdate']='230120230900';
+        $data['stopdate']='230120231000';
+        $data['filter']=0;
+        $sms=new SmsSend;
+        $cevap=$sms->smsGonderNN($msGsm,$data);
+        
+        
+        echo '<pre>';
+           print_r($cevap);
+        echo '<pre>';
+```
+
+### TEKLİ SMS GÖNDERİMİ
+
+Toplu SMS gönderimlerinizde diğer iki yöntemi (SOAP Servisi, XML POST) tercih etmenizi öneririz.   
+
+```
+        use Netgsm\Sms\SmsSend;
+        $sms=new SmsSend;
+        $data=array(
+            'msgheader'=>"",
+            'gsm'=>'553XXXXXXX',
+            'message'=>'Merhaba',
+            'filter'=>'0',
+            'startdate'=>'270120230950',
+            'stopdate'=>'270120231030',
+        );
+
+        $sonuc=$sms->smsgonder1_1($data);
+        
+        echo '<pre>';
+            print_r($sonuc);
+        echo '<pre>';
+```
+
+### SMS SORGULAMA
+
+Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumlarını öğrenebilirsiniz.
+<table width="300">
+  <th>Parametre</th>
+  <th>Anlamı</th>
+  <tr>
+    <td><b> type=0</b> </td>
+    <td> Tek BulkID sorgular.  </td>
+    
+  </tr>
+  <tr>
+    <td><b> type=2</b> </td>
+    <td> İki tarih arasında sorgulama yapar.   </td>
+  </tr>
+  
+ 
+</table>  
+
+```
+        use Netgsm\Sms\SmsSend;
+        $sms=new SmsSend;
+        $data['bulkid']='1297355397'; 
+        $data['startdate']='180120231500';
+        $data['stopdate']='200120231500';
+        $data['status']='100';
+        $data['type']='0';
+        $sonuc=$sms->smsSorgulama($data);
+    
+        echo '<pre>';
+            print_r($sonuc);
+        echo '<pre>';
+```  
+
+### SMS İPTALİ
+
+İleri tarihe zamanlanmış SMS'lerinizi iptal edebilirsiniz ya da görev zamanını değiştirebilirsiniz.  
+
+<table width="300">
+  <th>Parametre</th>
+  <th>Anlamı</th>
+  <tr>
+    <td><b> type=0</b> </td>
+    <td> gönderilirse görev iptal edilir. </td>
+    
+  </tr>
+  <tr>
+    <td><b> type=1</b> </td>
+    <td> gönderilip startdate stopdate girilirse güncelleme işlemi yapılır   </td>
+  </tr>
+  
+ 
+</table>  
+
+```
+        use Netgsm\Sms\SmsSend;
+      	$sms=new SmsSend;
+      	$data['bulkid']='1295384366';
+       	$data['startdate']='230120231300';
+      	$data['stopdate']='230120231400';
+       	$data['type']=0;
+      	$sonuc=$sms->smsiptal($data);
+       	
+      	echo '<pre>';
+            	print_r($sonuc);
+        echo '<pre>';
+```  
+### GELEN SMS SORGULAMA
+
+Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsiniz.  
+
+```
+        use Netgsm\Sms\SmsSend;	
+        $islem=new SmsSend;
+        $data['startdate']='120120230940';
+        $data['stopdate']='230120231400';
+        $sonuc=$islem->gelensms($data);
+        
+        echo '<pre>';
+            print_r($sonuc);
+        echo '<pre>';
+```
+
+### BAŞLIK(GÖNDERİCİ ADI) SORGULAMA
+
+Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama modülüdür. 
+
+```
+        use Netgsm\Sms\SmsSend;
+        $baslik=new SmsSend;
+        $sonuc=$baslik->basliksorgu();
+        
+        echo '<pre>';
+                print_r($sonuc);
+        echo '<pre>';
+```
+### SMS İPTALİ
+
+İleri tarihe zamanlanmış SMS'lerinizi iptal edebilirsiniz ya da görev zamanını değiştirebilirsiniz.  
+
+<table width="300">
+  <th>Parametre</th>
+  <th>Anlamı</th>
+  <tr>
+    <td><b> type</b> </td>
+    <td>1 değeri ile Kara listeye ekleme, 2 değeri ile Kara listeden çıkarma işlemi gerçekleşir. İstek yapılırken gönderilmesi zorunludur. </td>
+    
+  </tr>
+  
+  
+ 
+</table>  
+
+```
+        use Netgsm\Sms\SmsSend;
+      	$karaliste=new SmsSend;
+        $data['number']=['553xxxxxxx','553xxxxxxx'];
+        $data['tip']=2;
+        $sonuc=$karaliste->karaliste($data);
+        
+        echo '<pre>';
+             print_r($sonuc);
+        echo '<pre>';
+```  
+### KREDİ SORGULAMA
+
+Aboneliğinizde bulunan Kredi bilgilerine bu servisten ulaşabilirsiniz.  
+
+```
+        use Netgsm\Sms\SmsSend;
+	$kredi=new SmsSend;
+      	$sonuc=$kredi->paketsorgu();
+       	
+      	echo '<pre>';
+      	      print_r($sonuc);
+    	echo '<pre>';
+``` 
+
+### PAKET SORGULAMA
+
+Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsiniz.  
+
+```
+        use Netgsm\Sms\SmsSend;
+	$paket=new SmsSend;
+      	$sonuc=$paket->paketsorgu();
+       	
+      	echo '<pre>';
+      	      print_r($sonuc);
+    	echo '<pre>';
+``` 
+### FLASH SMS
+
+Gönderdiğiniz SMS'lerin kullanıcılarınızın cep telefonu ekranında bildirim olarak gösterilmesidir.  
+Abone numaranızın kurumsal olması gereklidir
+
+```
+        use Netgsm\Sms\SmsSend;
+   	$data['message']='test3';
+        $data['gsm']=['553XXXXXXX'];
+        // $data['encoding']='tr';//TÜRKÇE METİN
+        // $data['startdate']='200120231600';
+        // $data['stopdate']='200120231700';
+        // $data['filter']=0;//IYS
+        // $data['bayikodu']=1312; //TANIMLI BAYİKODUNUZ
+        // $data['appkey']='hsfxa-xhytf21-....';
+        // $data['header']='HEADERINIZ'; //TANIMILI MESAJ BAŞLIĞINIZ
+        $flashsms=new SmsSend;
+        $sonuc=$flashsms->flashSms($data);
+        
+        echo '<pre>';
+                print_r($sonuc);
+        echo '<pre>';
+``` 

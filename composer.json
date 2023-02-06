@@ -1,0 +1,21 @@
+{
+    "name": "netgsm/sms",
+    "description": "Netgsm Sms ",
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Netgsm\\Sms\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Netgsm",
+            "email": "teknikdestek@netgsm.com.tr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.2.5"
+    }
+}
