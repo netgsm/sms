@@ -334,6 +334,22 @@ Array
             	print_r($sonuc);
         echo '<pre>';
 ```  
+#### Başarılı istek sonuç
+```
+Array
+(
+    [aciklama] => İleri zamanlı görevinizin başarılı bir şekilde iptal edilğini ifade eder.
+    [code] => 00
+)
+```
+#### Başarısız istek sonuç
+```
+Array
+(
+    [aciklama] => Baslangiç ve bitis tarihleri arasindaki fark en az 1 , en fazla 21 saat olmalidir.
+    [code] => 60
+)
+```
 ### GELEN SMS SORGULAMA
 
 Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsiniz.  
