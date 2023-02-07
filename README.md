@@ -188,6 +188,10 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
   <th>Parametre</th>
   <th>Anlamı</th>
   <tr>
+   <td>bulkid</td>
+   <td>başarılı mesaj gönderimlerinizde dönen görevid (bulkid) nizdir.</td>
+ </tr>
+  <tr>
     <td><b> type=0</b> </td>
     <td> Tek BulkID sorgular.  </td>
     
