@@ -323,16 +323,16 @@ Array
 
 ```
         use Netgsm\Sms\SmsSend;
-      	$sms=new SmsSend;
-      	$data['bulkid']='1295384366';
-       	$data['startdate']='230120231300';
-      	$data['stopdate']='230120231400';
-       	$data['type']=0;
-      	$sonuc=$sms->smsiptal($data);
-       	
-      	echo '<pre>';
-            	print_r($sonuc);
-        echo '<pre>';
+        $sms=new SmsSend;
+        $data['bulkid']='1311176624';
+        $data['startdate']='080220230100';
+        $data['stopdate']='080220231000';
+        $data['type']=1;//type 0 gönderilirse  startdate ve stopdate gönderilmesine gerek yoktur.
+        $sonuc=$sms->smsiptal($data);
+
+        echo '<pre>';
+              print_r($sonuc);
+        echo '<pre>';
 ```  
 #### Başarılı istek sonuç
 ```
