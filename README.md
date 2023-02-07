@@ -300,9 +300,9 @@ Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama mod�
                 print_r($sonuc);
         echo '<pre>';
 ```
-### SMS İPTALİ
+### Kara Liste
 
-İleri tarihe zamanlanmış SMS'lerinizi iptal edebilirsiniz ya da görev zamanını değiştirebilirsiniz.  
+Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeniz için, belirlediğiniz numaraları Kara Listeye Ekleme / Kara Listeden Çıkarma modülünü kullanabilirsiniz. Kara Listede bulunan numaralara hesabınızdan SMS gönderilmez.Bu kontrol Netgsm tarafında sağlanır.  
 
 <table width="300">
   <th>Parametre</th>
