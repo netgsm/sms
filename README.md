@@ -493,3 +493,20 @@ Abone numaranızın kurumsal olması gereklidir
                 print_r($sonuc);
         echo '<pre>';
 ``` 
+#### Başarılı istek örnek sonuç
+```
+Array
+(
+    [aciklama] => Gönderdiğiniz SMS'inizin başarıyla sistemimize ulaştığını gösterir. 00 : Mesajınızın tarih formatına ilişkin bir hata olmadığı anlamına gelir. 123xxxxxx : Gönderilen SMSe ait ID bilgisi, Bu görevid (bulkid) niz ile mesajınızın iletim raporunu sorguyabilirsiniz.
+    [code] => 00
+    [bulkid] => 1311191776
+)
+```
+#### Başarısız istek örnek sonuç
+```
+Array
+(
+    [code] => 30
+    [aciklama] => Geçersiz kullanıcı adı , şifre veya kullanıcınızın API erişim izninin olmadığını gösterir.Ayrıca eğer API erişiminizde IP sınırlaması yaptıysanız ve sınırladığınız ip dışında gönderim sağlıyorsanız 30 hata kodunu alırsınız. API erişim izninizi veya IP sınırlamanızı , web arayüzden; sağ üst köşede bulunan ayarlar> API işlemleri menüsunden kontrol edebilirsiniz.
+)
+```
