@@ -253,33 +253,7 @@ Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama mod�
              print_r($sonuc);
         echo '<pre>';
 ```  
-### KREDİ SORGULAMA
 
-Aboneliğinizde bulunan Kredi bilgilerine bu servisten ulaşabilirsiniz.  
-
-```
-        use Netgsm\Sms\SmsSend;
-	$kredi=new SmsSend;
-      	$sonuc=$kredi->paketsorgu();
-       	
-      	echo '<pre>';
-      	      print_r($sonuc);
-    	echo '<pre>';
-``` 
-
-### PAKET SORGULAMA
-
-Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsiniz.  
-
-```
-        use Netgsm\Sms\SmsSend;
-	$paket=new SmsSend;
-      	$sonuc=$paket->paketsorgu();
-       	
-      	echo '<pre>';
-      	      print_r($sonuc);
-    	echo '<pre>';
-``` 
 ### FLASH SMS
 
 Gönderdiğiniz SMS'lerin kullanıcılarınızın cep telefonu ekranında bildirim olarak gösterilmesidir.  
