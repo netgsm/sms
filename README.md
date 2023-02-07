@@ -83,7 +83,26 @@ SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde il
         echo '<pre>';
           print_r($cevap);
         echo '<pre>';
+``` 
+#### Başarılı istek örnek 
 ```
+Array
+(
+    [code] => 00
+    [bulkid] => 1311033503
+    [durum] => Gönderdiğiniz SMS'inizin başarıyla sistemimize ulaştığını gösterir. 00 : Mesajınızın tarih formatına ilişkin bir hata olmadığı anlamına gelir. 123xxxxxx : Gönderilen SMSe ait ID bilgisi, Bu görevid (bulkid) niz ile mesajınızın iletim raporunu sorguyabilirsiniz.
+)
+```
+
+#### Başarısız istek örnek 
+```
+Array
+(
+    [code] => 30
+    [durum] => Geçersiz kullanıcı adı , şifre veya kullanıcınızın API erişim izninin olmadığını gösterir.Ayrıca eğer API erişiminizde IP sınırlaması yaptıysanız ve sınırladığınız ip dışında gönderim sağlıyorsanız 30 hata kodunu alırsınız. API erişim izninizi veya IP sınırlamanızı , web arayüzden; sağ üst köşede bulunan ayarlar> API işlemleri menüsunden kontrol edebilirsiniz.
+)
+```
+
 ### n:n SMS GÖNDERİMİ
 
 Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette gönderebilirsiniz. 
@@ -104,6 +123,23 @@ Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette g
         echo '<pre>';
            print_r($cevap);
         echo '<pre>';
+```
+#### Başarılı istek örnek 
+```
+Array
+(
+    [code] => 00
+    [bulkid] => 1311033503
+    [durum] => Gönderdiğiniz SMS'inizin başarıyla sistemimize ulaştığını gösterir. 00 : Mesajınızın tarih formatına ilişkin bir hata olmadığı anlamına gelir. 123xxxxxx : Gönderilen SMSe ait ID bilgisi, Bu görevid (bulkid) niz ile mesajınızın iletim raporunu sorguyabilirsiniz.
+)
+```
+#### Başarısız istek örnek 
+```
+Array
+(
+    [code] => 30
+    [durum] => Geçersiz kullanıcı adı , şifre veya kullanıcınızın API erişim izninin olmadığını gösterir.Ayrıca eğer API erişiminizde IP sınırlaması yaptıysanız ve sınırladığınız ip dışında gönderim sağlıyorsanız 30 hata kodunu alırsınız. API erişim izninizi veya IP sınırlamanızı , web arayüzden; sağ üst köşede bulunan ayarlar> API işlemleri menüsunden kontrol edebilirsiniz.
+)
 ```
 
 ### TEKLİ SMS GÖNDERİMİ
