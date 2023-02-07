@@ -17,7 +17,7 @@ https://www.netgsm.com.tr/dokuman/
 
 ### Kurulum
 
-composer require netgsm/smssend  
+<b>composer require netgsm/smssend  </b>
 
 .env  dosyası içerisinde NETGSM ABONELİK bilgileriniz tanımlanması zorunludur.  
 
