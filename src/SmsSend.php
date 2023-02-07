@@ -28,8 +28,8 @@ class SmsSend
        if(!isset($data['status'])){
         $data['status']=100;
        }
-       if( $data['bastar']!=null && $data['bittar']!=null    ){
-            $type=2;
+       if( isset($data['type'])   ){
+        $type=$data['type'];
        }
        else{
         $type=0;
@@ -95,6 +95,7 @@ class SmsSend
          $usercode=env("NETGSM_USERCODE");
          $secret=urlencode(env("NETGSM_PASSWORD"));
          $url= "https://api.netgsm.com.tr/sms/report/?usercode=".$usercode."&password=".$secret."&bulkid=".$data['bulkid']."&type=".$type."&status=".$data['status']."&bastar=".$data['bastar']."&bittar=".$data['bittar']."&version=2&telno=".$data['telno'];     
+        
          $ch = curl_init($url);
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
          curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -108,8 +109,9 @@ class SmsSend
          $data=explode('<br>',$balanceInfo);
          $data=array_filter($data);
          $satirsayisi=count($data);
-        
+         
         if($satirsayisi<2){
+            
             $dizi = explode (" ",$balanceInfo);
             if(($dizi[0]==30 || $dizi[0]==60 || $dizi[0]==70 || $dizi[0]==80)){
                 
@@ -145,21 +147,41 @@ class SmsSend
         }
         else{
             
+            
             foreach($data as $k=>$v){
+                
                 
                 $donen=[];
                 $dizi=explode(' ',$v);
+                if(!isset($dizi[7]))
+                {
+                    $dzEk=array(0=>null);
+                    $dizi=array_merge($dzEk,$dizi);
+                }
+                $res[$k]['bulkid']=$dizi[0];
+                $res[$k]['cepno']=$dizi[1];
+                $res[$k]['durum']=$state[$dizi[2]];
+                $res[$k]['durumcode']=$dizi[2];
                 
-                $dizi[6]=trim($dizi[6],'<br>');
-                $res[$k]['durum']=$state[$dizi[1]];
-                $res[$k]['durumcode']=$dizi[1];
-                $res[$k]['operator']=$operator[$dizi[2]];
-                $res[$k]['operatorcode']=$dizi[2];
-                $res[$k]['hataaciklama']=$hatakod[$dizi[6]];
-                $res[$k]['hatakod']=$dizi[6];
-                $res[$k]['cepno']=$dizi[0];
-                $res[$k]['mesajboy']=$dizi[3];
-                $res[$k]['tarih']=$dizi[4].' '.$dizi[5];
+                if(isset($operator[$dizi[3]]))
+                {
+                    $res[$k]['operator']=$operator[$dizi[3]];
+                    $res[$k]['operatorcode']=$dizi[3];
+                }
+                else{
+                    $res[$k]['operator']='-';
+                    $res[$k]['operatorcode']=$dizi[3];
+                }
+               
+                $res[$k]['mesajboy']=$dizi[4];
+                $res[$k]['tarih']=$dizi[5].' '.$dizi[6];
+                $res[$k]['hataaciklama']=$hatakod[$dizi[7]];
+                $res[$k]['hatakod']=$dizi[7];
+
+                
+               
+                
+                
                 
             }
           return $res;
@@ -304,6 +326,7 @@ class SmsSend
             "02"=>"Gönderdiğiniz SMS'inizin başarıyla sistemimize ulaştığını gösterir. 02 : Mesajınızın sonlandırma tarihine ilişkin bir hata olduğunu gösterir, sistem tarihi ile değiştirilip işleme alınmıştır. 123xxxxxx : Gönderilen SMSe ait ID bilgisi, Bu görevid (bulkid) niz ile mesajınızın iletim raporunu sorguyabilirsiniz.",
 
         );
+        
         $usercode=env("NETGSM_USERCODE");
          $secret=env("NETGSM_PASSWORD");
          
@@ -371,11 +394,16 @@ class SmsSend
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlData);
 		$result = curl_exec($ch);
         $dz=explode(" ",$result);
-       
-
-        $res['aciklama']=$sonuc[$dz[0]];
-        $res['code']=$dz[0];
-        $res['bulkid']=$dz[1];
+        if($dz[0]==20||$dz[0]==30||$dz[0]==40||$dz[0]==50||$dz[0]==51||$dz[0]==70||$dz[0]==80||$dz[0]==85){
+            $res['code']=$dz[0];
+            $res['aciklama']=$sonuc[$dz[0]];
+        }
+        else{
+            $res['aciklama']=$sonuc[$dz[0]];
+            $res['code']=$dz[0];
+            $res['bulkid']=$dz[1];
+        }
+        
         return $res;
     }
     public function smsGonderNN($msGsm,$data):array
@@ -469,14 +497,14 @@ class SmsSend
         $dizi=explode(' ',$result);
         if(count($dizi)==2)
         {
-            $res["aciklama"]=$sonuc[$dizi[0]];
+            $res["durum"]=$sonuc[$dizi[0]];
             $res["code"]=$dizi[0];
             $res["bulkid"]=$dizi[1];;
             
         }
         else
         {
-            $res["aciklama"]=$sonuc[$dizi[0]];
+            $res["durum"]=$sonuc[$dizi[0]];
             $res["code"]=$dizi[0];
             
         }
@@ -492,26 +520,26 @@ class SmsSend
         if(!isset($data['stopdate'])){
             $data['stopdate']=null;
         }
-        if(!isset($data['bulkid'])){
-            $data['bulkid']=null;
-        }
+        
         if(!isset($data['type'])){
             $data['type']=null;
         }
        
         $usercode=env("NETGSM_USERCODE");
          $secret=env("NETGSM_PASSWORD");
-        $xmlData='<?xml version="1.0" encoding="UTF-8"?>
+         $xmlData='<?xml version="1.0" encoding="UTF-8"?>
             <mainbody>
             <header>
                 <usercode>'.$usercode.'</usercode>
                 <password>'.$secret.'</password>
+                <gorevid>'.$data['bulkid'].'</gorevid>
                 <startdate>'.$data['startdate'].'</startdate>
                 <stopdate>'.$data['stopdate'].'</stopdate>
-                <gorevid>'.$data['bulkid'].'</gorevid>
                 <type>'.$data['type'].'</type>
             </header>
             </mainbody>';
+        
+            
         $ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL,'https://api.netgsm.com.tr/sms/edit');
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,2);
@@ -537,7 +565,8 @@ class SmsSend
             "47"=>"Gönderdiğiniz başlangıç tarihinin bugünün tarihinden küçük olduğunu ifade eder.",
             "48"=>"Gönderdiğiniz bitiş tarihinin bugünün tarihinden küçük olduğunu ifade eder.",
             "60"=>"Baslangiç ve bitis tarihleri arasindaki fark en az 1 , en fazla 21 saat olmalidir.",
-            "70"=>"Gönderdiğiniz görevidye ait kayıt olmadığını ifade eder."
+            "70"=>"Gönderdiğiniz görevidye ait kayıt olmadığını ifade eder.",
+            "100"=>'Hatalı sorgu'
 
         );
         
@@ -782,7 +811,7 @@ class SmsSend
         }
         if(!isset($data['stopdate']))
         {
-            $data['filter']=null;
+            $data['stopdate']=null;
         }
         $curl = curl_init();
         curl_setopt_array($curl, array(
