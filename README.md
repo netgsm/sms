@@ -365,7 +365,34 @@ Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsin
             print_r($sonuc);
         echo '<pre>';
 ```
+#### Başarılı istek örnek sonuç
+```
+Array
+(
+    [0] => Array
+        (
+            [telno] => 553xxxxxxx 
+            [mesaj] =>  mesaj_içerigi
+            [tarih] =>  12.01.2023 09:43:51
+        )
 
+    [1] => Array
+        (
+            [telno] => 553xxxxxxx 
+            [mesaj] =>  mesaj_içerigi
+            [tarih] =>  12.01.2023 09:43:04
+        )
+
+)
+```
+#### Başarısız istek örnek sonuç
+```
+Array
+(
+    [code] => 60
+    [aciklama] => Arama kiterlerindeki startdate ve stopdate zaman farkının 30 günden fazla olduğunu ifade eder.
+)
+```
 ### BAŞLIK(GÖNDERİCİ ADI) SORGULAMA
 
 Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama modülüdür. 
@@ -378,6 +405,26 @@ Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama mod�
         echo '<pre>';
                 print_r($sonuc);
         echo '<pre>';
+```
+#### Başarılı istek örnek sonuç
+```
+Array
+(
+    [msgheader] => Array
+        (
+            [0] => 850xxxxxxx
+            [1] => HEADER_BILGISI
+        )
+
+)
+```
+#### Başarısız istek örnek sonuç
+```
+Array
+(
+    [code] => 30
+    [error] => Kullanici bilgisi bulunamadi
+)
 ```
 ### Kara Liste
 
@@ -398,7 +445,7 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
 
 ```
         use Netgsm\Sms\SmsSend;
-      	$karaliste=new SmsSend;
+       	$karaliste=new SmsSend;
         $data['number']=['553xxxxxxx','553xxxxxxx'];
         $data['tip']=2;
         $sonuc=$karaliste->karaliste($data);
@@ -407,7 +454,22 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
              print_r($sonuc);
         echo '<pre>';
 ```  
-
+#### Başarılı istek örnek sonuç
+```
+Array
+(
+    [code] => OK
+    [aciklama] => Kara Listeye Ekleme / Çıkarma işleminde bir hata olmadığını gösterir.
+)
+```
+#### Başarısız istek örnek sonuç
+```
+Array
+(
+    [code] => 60
+    [aciklama] => Geçersiz tip gönderimi
+)
+```
 ### FLASH SMS
 
 Gönderdiğiniz SMS'lerin kullanıcılarınızın cep telefonu ekranında bildirim olarak gösterilmesidir.  
@@ -415,7 +477,7 @@ Abone numaranızın kurumsal olması gereklidir
 
 ```
         use Netgsm\Sms\SmsSend;
-   	$data['message']='test3';
+       	$data['message']='test3';
         $data['gsm']=['553XXXXXXX'];
         // $data['encoding']='tr';//TÜRKÇE METİN
         // $data['startdate']='200120231600';
