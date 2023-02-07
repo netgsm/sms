@@ -201,11 +201,11 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
     <td> İki tarih arasında sorgulama yapar.   </td>
   </tr>
  <tr>
-<td><code>bastar</code></td>
+<td>bastar</td>
 <td>İki tarih arası sorgulamalarınızda başlangıç tarihidir(ddmmyyyy)</td>
 </tr>
  <tr>
-<td><code>bittar</code></td>
+<td>bittar</td>
 <td>İki tarih arası sorgulamalarınızda bitiş tarihidir(ddmmyyyy) Bütün numaralar birbirlerinden &lt;BR&gt; kodu ile ayrılmiştir.</td>
 </tr>
   
