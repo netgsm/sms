@@ -144,7 +144,7 @@ Array
 
 ### TEKLİ SMS GÖNDERİMİ
 
-Toplu SMS gönderimlerinizde diğer iki yöntemi (SOAP Servisi, XML POST) tercih etmenizi öneririz.   
+
 
 ```
         use Netgsm\Sms\SmsSend;
@@ -164,7 +164,23 @@ Toplu SMS gönderimlerinizde diğer iki yöntemi (SOAP Servisi, XML POST) tercih
             print_r($sonuc);
         echo '<pre>';
 ```
-
+#### Başarılı istek örnek
+```
+Array
+(
+    [code] => 00
+    [aciklama] => Görevinizin tarih formatinda bir hata olmadığını gösterir.
+    [bulkid] => 1311044635
+)
+```
+#### BaşarıSIZ istek örnek
+```
+Array
+(
+    [code] => 40
+    [aciklama] => Mesaj başlığınızın (gönderici adınızın) sistemde tanımlı olmadığını ifade eder. Gönderici adlarınızı API ile sorgulayarak kontrol edebilirsiniz.
+)
+```
 ### SMS SORGULAMA
 
 Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumlarını öğrenebilirsiniz.
@@ -199,6 +215,29 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
         echo '<pre>';
 ```  
 
+#### Başarılı istek sonuç
+```
+Array
+(
+    [durum] => İletilmiş olanlar
+    [durumcode] => 1
+    [operator] => Türk Telekom
+    [operatorcode] => 20
+    [hataaciklama] => Hata Yok.
+    [hatakod] => 0
+    [cepno] => 905531105200
+    [mesajboy] => 1
+    [tarih] => 23.01.2023 09:35:00
+)
+```
+#### Başarısız istek sonuç
+```
+Array
+(
+    [code] => 60
+    [aciklama] => Arama kriterlerinize göre listelenecek kayıt olmadığını ifade eder.
+)
+```
 ### SMS İPTALİ
 
 İleri tarihe zamanlanmış SMS'lerinizi iptal edebilirsiniz ya da görev zamanını değiştirebilirsiniz.  
