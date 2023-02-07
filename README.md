@@ -199,20 +199,68 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
   
  
 </table>  
-
+<table>
+<thead>
+<tr>
+<th>Kod</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>İletilmeyi bekleyenler</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>İletilmiş olanlar</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Zaman aşımına uğramış olanlar</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>Hatalı veya kısıtlı numara</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>Operatöre gönderilemedi</td>
+</tr>
+<tr>
+<td><code>11</code></td>
+<td>Operatör tarafından kabul edilmemiş olanlar</td>
+</tr>
+<tr>
+<td><code>12</code></td>
+<td>Gönderim hatası olanlar</td>
+</tr>
+<tr>
+<td><code>13</code></td>
+<td>Mükerrer olanlar</td>
+</tr>
+<tr>
+<td><code>100</code></td>
+<td>Tüm mesaj durumları</td>
+</tr>
+<tr>
+<td><code>103</code></td>
+<td>Başarısız Görev (Bu görevin tamamı başarısız olmuştur.)</td>
+</tr>
+</tbody>
+</table>
 ```
-        use Netgsm\Sms\SmsSend;
-        $sms=new SmsSend;
-        $data['bulkid']='1297355397'; 
-        $data['startdate']='180120231500';
-        $data['stopdate']='200120231500';
-        $data['status']='100';
-        $data['type']='0';
-        $sonuc=$sms->smsSorgulama($data);
+        $sms=new SmsSend;
+        $data['bulkid']="1311042194";//bulkid girildiğinde type 0 gönderilmelidir.
+        $data['bastar']='010220231500';//bastar ve bittar girildiğinde type 2 gönderilmelidir
+        $data['bittar']='070220231500';
+        $data['status']='100';
+        $data['type']='0';
+        $sonuc=$sms->smsSorgulama($data);
     
-        echo '<pre>';
-            print_r($sonuc);
-        echo '<pre>';
+        echo '<pre>';
+        print_r($sonuc);
+        echo '<pre>';
 ```  
 
 #### Başarılı istek sonuç
