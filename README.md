@@ -196,9 +196,19 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
     <td><b> type=2</b> </td>
     <td> İki tarih arasında sorgulama yapar.   </td>
   </tr>
+ <tr>
+<td><code>bastar</code></td>
+<td>İki tarih arası sorgulamalarınızda başlangıç tarihidir(ddmmyyyy)</td>
+</tr>
+ <tr>
+<td><code>bittar</code></td>
+<td>İki tarih arası sorgulamalarınızda bitiş tarihidir(ddmmyyyy) Bütün numaralar birbirlerinden &lt;BR&gt; kodu ile ayrılmiştir.</td>
+</tr>
   
- 
+
 </table>  
+
+ <b>status</b>
 <table>
 <thead>
 <tr>
@@ -249,6 +259,7 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
 </tr>
 </tbody>
 </table>
+
 ```
         $sms=new SmsSend;
         $data['bulkid']="1311042194";//bulkid girildiğinde type 0 gönderilmelidir.
