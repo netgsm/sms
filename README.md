@@ -173,7 +173,7 @@ Array
     [bulkid] => 1311044635
 )
 ```
-#### BaşarıSIZ istek örnek
+#### Başarısız istek örnek
 ```
 Array
 (
