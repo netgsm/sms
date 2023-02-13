@@ -80,7 +80,7 @@ SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde il
         use Netgsm\Sms\SmsSend;
         $data['message']='test';
         $data['no']=['553xxxxxxx']; //$data['gsm']=['553xxxxxxx','555xxxxxxx'];
-        $data['header'];
+        $data['header']="MESSAGE_BASLİK";
         $data['filter']=0;
         // $data['encoding']='tr';
         //$data['startdate']='200120231600';
