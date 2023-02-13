@@ -270,6 +270,7 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
 </table>
 
 ```
+        use Netgsm\Sms\SmsSend;
         $sms=new SmsSend;
         $data['bulkid']="1311042194";//bulkid girildiğinde type 0 gönderilmelidir.
         $data['bastar']='010220231500';//bastar ve bittar girildiğinde type 2 gönderilmelidir
