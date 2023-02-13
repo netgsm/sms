@@ -166,7 +166,7 @@ Array
         );
 
         $sonuc=$sms->smsgonder1_1($data);
-        dd($cevap);
+        dd($sonuc);
         die;
 ```
 #### Başarılı istek örnek
