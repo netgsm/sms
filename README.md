@@ -1,14 +1,24 @@
 
 
 
-# Netgsm Sms Laravel Paketi
+# Laravel & Symfony Netgsm Sms Entegrasyonu
 
-Netgsm Sms paket aboneliği bulunan kullanıcılarımız için laravel paketidir.
+Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidir.
 
 # İletişim & Destek
 
  Netgsm API Servisi ile alakalı tüm sorularınızı ve önerilerinizi teknikdestek@netgsm.com.tr adresine iletebilirsiniz.
+### Supported Laravel Versions
 
+Laravel 6.x, Laravel 7.x, Laravel 8.x, Laravel 9.x, 
+
+### Supported Symfony Versions
+
+Symfony 4.x, Symfony 5.x, Symfony 6.x
+
+### Supported Php Versions
+
+PHP 7.2.5 ve üzeri
 
 # Doküman 
 https://www.netgsm.com.tr/dokuman/
