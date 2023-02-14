@@ -8,7 +8,36 @@ use SimpleXMLElement;
 
 class SmsSend
 {   
-   
+    private $username;
+    private $password;
+    private $header;
+    public function __construct()
+    {
+     if(isset($_ENV['NETGSM_USERCODE']))
+      {
+          $this->username=$_ENV['NETGSM_USERCODE'];
+      }
+      else{
+          $this->username='x';
+      }
+      if(isset($_ENV['NETGSM_PASSWORD']))
+      {
+          $this->password=$_ENV['NETGSM_PASSWORD'];
+      }
+      else{
+          $this->password='x';
+      }
+      if(isset($_ENV['NETGSM_HEADER']))
+      {
+          $this->header=$_ENV['NETGSM_HEADER'];
+      }
+      else{
+          $this->password='x';
+      }
+      
+      
+        
+    }
     public function smsSorgulama($data):array
     {
         
@@ -92,9 +121,8 @@ class SmsSend
 
      );
       
-         $usercode=env("NETGSM_USERCODE");
-         $secret=urlencode(env("NETGSM_PASSWORD"));
-         $url= "https://api.netgsm.com.tr/sms/report/?usercode=".$usercode."&password=".$secret."&bulkid=".$data['bulkid']."&type=".$type."&status=".$data['status']."&bastar=".$data['bastar']."&bittar=".$data['bittar']."&version=2&telno=".$data['telno'];     
+        
+         $url= "https://api.netgsm.com.tr/sms/report/?usercode=".$this->username."&password=".$this->password."&bulkid=".$data['bulkid']."&type=".$type."&status=".$data['status']."&bastar=".$data['bastar']."&bittar=".$data['bittar']."&version=2&telno=".$data['telno'];     
         
          $ch = curl_init($url);
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -108,10 +136,7 @@ class SmsSend
          $balanceInfo = $http_response;
          $data=explode('<br>',$balanceInfo);
          $data=array_filter($data);
-         $satirsayisi=count($data);
          
-        if($satirsayisi<2){
-            
             $dizi = explode (" ",$balanceInfo);
             if(($dizi[0]==30 || $dizi[0]==60 || $dizi[0]==70 || $dizi[0]==80)){
                 
@@ -127,65 +152,46 @@ class SmsSend
                 return $res;
              }
              else{
-                $dizi[6]=trim($dizi[6],'<br>');
-                $res['durum']=$state[$dizi[1]];
-                $res['durumcode']=$dizi[1];
-                $res['operator']=$operator[$dizi[2]];
-                $res['operatorcode']=$dizi[2];
-                $res['hataaciklama']=$hatakod[$dizi[6]];
-                $res['hatakod']=$dizi[6];
-                $res['cepno']=$dizi[0];
-                $res['mesajboy']=$dizi[3];
-                $res['tarih']=$dizi[4].' '.$dizi[5];
+               
+                foreach($data as $k=>$v){
                 
+                
+                    $donen=[];
+                    $dizi=explode(' ',$v);
+                    if(!isset($dizi[7]))
+                    {
+                        $dzEk=array(0=>null);
+                        $dizi=array_merge($dzEk,$dizi);
+                    }
+                    $res[$k]['bulkid']=$dizi[0];
+                    $res[$k]['cepno']=$dizi[1];
+                    $res[$k]['durum']=$state[$dizi[2]];
+                    $res[$k]['durumcode']=$dizi[2];
+                    
+                    if(isset($operator[$dizi[3]]))
+                    {
+                        $res[$k]['operator']=$operator[$dizi[3]];
+                        $res[$k]['operatorcode']=$dizi[3];
+                    }
+                    else{
+                        $res[$k]['operator']='-';
+                        $res[$k]['operatorcode']=$dizi[3];
+                    }
+                   
+                    $res[$k]['mesajboy']=$dizi[4];
+                    $res[$k]['tarih']=$dizi[5].' '.$dizi[6];
+                    $res[$k]['hataaciklama']=$hatakod[$dizi[7]];
+                    $res[$k]['hatakod']=$dizi[7];
+      
+                }
     
                 return $res;
                 
             }
             
             
-        }
-        else{
-            
-            
-            foreach($data as $k=>$v){
-                
-                
-                $donen=[];
-                $dizi=explode(' ',$v);
-                if(!isset($dizi[7]))
-                {
-                    $dzEk=array(0=>null);
-                    $dizi=array_merge($dzEk,$dizi);
-                }
-                $res[$k]['bulkid']=$dizi[0];
-                $res[$k]['cepno']=$dizi[1];
-                $res[$k]['durum']=$state[$dizi[2]];
-                $res[$k]['durumcode']=$dizi[2];
-                
-                if(isset($operator[$dizi[3]]))
-                {
-                    $res[$k]['operator']=$operator[$dizi[3]];
-                    $res[$k]['operatorcode']=$dizi[3];
-                }
-                else{
-                    $res[$k]['operator']='-';
-                    $res[$k]['operatorcode']=$dizi[3];
-                }
-               
-                $res[$k]['mesajboy']=$dizi[4];
-                $res[$k]['tarih']=$dizi[5].' '.$dizi[6];
-                $res[$k]['hataaciklama']=$hatakod[$dizi[7]];
-                $res[$k]['hatakod']=$dizi[7];
-
-                
-               
-                
-                
-                
-            }
-          return $res;
-        }
+    
+       
          
          
         
@@ -195,8 +201,6 @@ class SmsSend
     public function smsGonder($data):array
     {
         
-        $usercode=env("NETGSM_USERCODE");
-         $secret=env("NETGSM_PASSWORD");
          
         if(!isset($data['message'])){
             $data['message']=null;
@@ -220,7 +224,7 @@ class SmsSend
             $data['appkey']=null;
         }
         if(!isset($data['header'])){
-            $header=env("NETGSM_HEADER");
+            $header=$this->header;
         }
         else{
             $header=$data['header'];
@@ -246,8 +250,8 @@ class SmsSend
          <mainbody>
          <header>
          <company dil="TR">Netgsm</company>        
-         <usercode>'.$usercode.'</usercode>
-         <password>'.$secret.'</password>
+         <usercode>'.$this->username.'</usercode>
+         <password>'.$this->password.'</password>
          <type>1:n</type>
          <msgheader>'.$header.'</msgheader>
          <startdate>'.$data['startdate'].'</startdate>
@@ -264,6 +268,8 @@ class SmsSend
          '.$nolar.'
          </body>
          </mainbody>';
+        
+         
          $ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL,'https://api.netgsm.com.tr/sms/send/xml');
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,2);
@@ -327,8 +333,7 @@ class SmsSend
 
         );
         
-        $usercode=env("NETGSM_USERCODE");
-         $secret=env("NETGSM_PASSWORD");
+        
          
         if(!isset($data['message'])){
             $data['message']=null;
@@ -352,7 +357,7 @@ class SmsSend
             $data['appkey']=null;
         }
         if(!isset($data['header'])){
-            $header=env("NETGSM_HEADER");
+            $header=$this->header;
         }
         else{
             $header=$data['header'];
@@ -370,8 +375,8 @@ class SmsSend
         <mainbody>
         <header>
         <company dil="TR">Netgsm</company>        
-        <usercode>'.$usercode.'</usercode>
-        <password>'.$secret.'</password>
+        <usercode>'.$this->username.'</usercode>
+        <password>'.$this->password.'</password>
         <type>1:n</type>
         <flash>1</flash>
         <msgheader>'.$header.'</msgheader>
@@ -437,7 +442,7 @@ class SmsSend
             $data['filter']=null;
         }
         if(!isset($data['header'])){
-            $header=env("NETGSM_HEADER");
+            $header=$this->header;
         }
         else{
             $header=$data['header'];
@@ -458,22 +463,20 @@ class SmsSend
            
         }
         if(!isset($data['header'])){
-            $header=env("NETGSM_HEADER");
+            $header=$this->header;
         }
         else{
             $header=$data['header'];
         }
-        $usercode=env("NETGSM_USERCODE");
-        $secret=env("NETGSM_PASSWORD");
         $xmlData='<?xml version="1.0" encoding="UTF-8"?>
             <mainbody>
             <header>
             <company dil="TR">Netgsm</company>
-            <usercode>'.$usercode.'</usercode>
+            <usercode>'.$this->username.'</usercode>
             <msgheader>'.$header.'</msgheader>
             <startdate>'.$data['startdate'].'</startdate>
             <stopdate>'.$data['stopdate'].'</stopdate>
-            <password>'.$secret.'</password>
+            <password>'.$this->password.'</password>
             <filter>'.$data['filter'].'</filter>
             <type>n:n</type>
             <msgheader>'.$header.'</msgheader>
@@ -525,13 +528,11 @@ class SmsSend
             $data['type']=null;
         }
        
-        $usercode=env("NETGSM_USERCODE");
-         $secret=env("NETGSM_PASSWORD");
          $xmlData='<?xml version="1.0" encoding="UTF-8"?>
             <mainbody>
             <header>
-                <usercode>'.$usercode.'</usercode>
-                <password>'.$secret.'</password>
+                <usercode>'.$this->username.'</usercode>
+                <password>'.$this->password.'</password>
                 <gorevid>'.$data['bulkid'].'</gorevid>
                 <startdate>'.$data['startdate'].'</startdate>
                 <stopdate>'.$data['stopdate'].'</stopdate>
@@ -564,8 +565,10 @@ class SmsSend
             "46"=>"Gönderdiğiniz bitiş tarihinde (stopdate parametresi) format hatası olduğunu ifade eder.",
             "47"=>"Gönderdiğiniz başlangıç tarihinin bugünün tarihinden küçük olduğunu ifade eder.",
             "48"=>"Gönderdiğiniz bitiş tarihinin bugünün tarihinden küçük olduğunu ifade eder.",
-            "60"=>"Baslangiç ve bitis tarihleri arasindaki fark en az 1 , en fazla 21 saat olmalidir.",
-            "70"=>"Gönderdiğiniz görevidye ait kayıt olmadığını ifade eder.",
+            "49"=>"Baslangiç ve bitis tarihleri arasindaki fark en az 1 , en fazla 21 saat olmalidir.",
+            "50"=>"-",
+            "60"=>"Gönderdiğiniz görevid'ye ait kayıt olmadığını ifade eder.",
+            "70"=>"Hatalı sorgulama. Gönderdiğiniz parametrelerden birisi hatalı veya zorunlu alanlardan birinin eksik olduğunu ifade eder.",
             "100"=>'Hatalı sorgu'
 
         );
@@ -581,8 +584,8 @@ class SmsSend
         $xmlData='<?xml version="1.0"?>
         <mainbody>
             <header>		
-                <usercode>'.env("NETGSM_USERCODE").'</usercode>
-                <password>'.env("NETGSM_PASSWORD").'</password>
+                <usercode>'.$this->username.'</usercode>
+                <password>'.$this->password.'</password>
                 <stip>2</stip>      
                 </header>		
         </mainbody>';
@@ -622,8 +625,8 @@ class SmsSend
         $xmlData='<?xml version="1.0"?>
         <mainbody>
             <header>		
-                <usercode>'.env("NETGSM_USERCODE").'</usercode>
-                <password>'.env("NETGSM_PASSWORD").'</password>
+                <usercode>'.$this->username.'</usercode>
+                <password>'.$this->password.'</password>
                 <stip>1</stip>      
                 </header>		
         </mainbody>';
@@ -658,8 +661,8 @@ class SmsSend
         $xmlData='<?xml version="1.0" encoding="UTF-8"?>
         <mainbody>
         <header>
-            <usercode>'.env("NETGSM_USERCODE").'</usercode>
-            <password>'.env("NETGSM_PASSWORD").'</password>
+            <usercode>'.$this->username.'</usercode>
+            <password>'.$this->password.'</password>
             <startdate>'.$data['startdate'].'</startdate>
             <stopdate>'.$data['stopdate'].'</stopdate>
             <type>0</type>
@@ -709,8 +712,8 @@ class SmsSend
     {
         try {
             $arr_acc = array(
-                "usercode" => env("NETGSM_USERCODE"),
-                "password" => env("NETGSM_PASSWORD")
+                "usercode" => $this->username,
+                "password" => $this->password
             );
             
             $content = json_encode($arr_acc);
@@ -755,8 +758,8 @@ class SmsSend
         $xmlData='<?xml version="1.0"?>
         <mainbody>
         <header>  
-            <usercode>'.env('NETGSM_USERCODE').'</usercode>
-            <password>'.env('NETGSM_PASSWORD').'</password>
+            <usercode>'.$this->username.'</usercode>
+            <password>'.$this->password.'</password>
             <tip>'.$data['tip'].'</tip>
         </header>
         <body>'.$no.'</body>
@@ -791,7 +794,10 @@ class SmsSend
        
         if(!isset($data['msgheader']))
         {
-            $data['msgheader']=env("NETGSM_HEADER");
+            $data['msgheader']=$this->header;
+        }
+        else{
+            $data['msgheader']=$data['msgheader'];
         }
         if(!isset($data['gsm']))
         {
@@ -813,6 +819,7 @@ class SmsSend
         {
             $data['stopdate']=null;
         }
+        
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api.netgsm.com.tr/sms/send/get',
@@ -823,11 +830,11 @@ class SmsSend
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('usercode' => env("NETGSM_USERCODE"),'password' => env("NETGSM_PASSWORD"),'gsmno' => $data['gsm'],'message' => $data['message'],'msgheader' => $data['msgheader'],'filter' => $data['filter'],'startdate' => $data['startdate'],'stopdate' => $data['stopdate']),
+            CURLOPT_POSTFIELDS => array('usercode' => $this->username,'password' => $this->password,'gsmno' => $data['gsm'],'message' => $data['message'],'msgheader' => $data['msgheader'],'filter' => $data['filter'],'startdate' => $data['startdate'],'stopdate' => $data['stopdate']),
         ));
-
+        
         $response = curl_exec($curl);
-
+        
         curl_close($curl);
         
         $sonuc=array(
@@ -843,18 +850,19 @@ class SmsSend
             "85"=>"Mükerrer Gönderim sınır aşımı. Aynı numaraya 1 dakika içerisinde 20'den fazla görev oluşturulamaz."
 
         );
-
+        
         $dz=explode(" ",$response);
 
-        
+      
 
         if($dz[0]==20|| $dz[0]==30|| $dz[0]==40|| $dz[0]==50|| $dz[0]==51|| $dz[0]==70|| $dz[0]==85 ) 
         {
             $res['code']=$dz[0];
             $res['aciklama']=$sonuc[$dz[0]];
         }
-        elseif($dz[0]==00|| $dz[0]==01|| $dz[0]==02)
+        elseif($dz[0]=="00"|| $dz[0]=="01"|| $dz[0]=="02")
         {
+           
             $res['code']=$dz[0];
             $res['aciklama']=$sonuc[$dz[0]];
             $res['bulkid']=$dz[1];
@@ -868,5 +876,6 @@ class SmsSend
         
 
    }
+    
     
 }
