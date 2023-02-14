@@ -1,14 +1,24 @@
 
 
 
-# Netgsm Sms Laravel Paketi
+# Laravel & Symfony Netgsm Sms Entegrasyonu
 
-Netgsm Sms paket aboneliği bulunan kullanıcılarımız için laravel paketidir.
+Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidir.
 
 # İletişim & Destek
 
  Netgsm API Servisi ile alakalı tüm sorularınızı ve önerilerinizi teknikdestek@netgsm.com.tr adresine iletebilirsiniz.
+### Supported Laravel Versions
 
+Laravel 6.x, Laravel 7.x, Laravel 8.x, Laravel 9.x, 
+
+### Supported Symfony Versions
+
+Symfony 4.x, Symfony 5.x, Symfony 6.x
+
+### Supported Php Versions
+
+PHP 7.2.5 ve üzeri
 
 # Doküman 
 https://www.netgsm.com.tr/dokuman/
@@ -69,7 +79,8 @@ SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde il
 ```
         use Netgsm\Sms\SmsSend;
         $data['message']='test';
-        $data['no']=['553xxxxxxx']; //$data['gsm']=['553xxxxxxx','555xxxxxxx']	
+        $data['no']=['553xxxxxxx']; //$data['gsm']=['553xxxxxxx','555xxxxxxx'];
+        $data['header']="MESSAGE_BASLİK";
         $data['filter']=0;
         // $data['encoding']='tr';
         //$data['startdate']='200120231600';
@@ -79,10 +90,8 @@ SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde il
         
         $sms= new SmsSend;
         $cevap=$sms->smsGonder($data);
-        
-        echo '<pre>';
-          print_r($cevap);
-        echo '<pre>';
+        dd($cevap);
+        die;
 ``` 
 #### Başarılı istek örnek 
 ```
@@ -115,14 +124,12 @@ Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette g
         $msGsm[1]['message']='MESAJ METNİ 2';
         $data['startdate']='230120230900';
         $data['stopdate']='230120231000';
+        $data['header']="FATIHAVCI";
         $data['filter']=0;
         $sms=new SmsSend;
         $cevap=$sms->smsGonderNN($msGsm,$data);
-        
-        
-        echo '<pre>';
-           print_r($cevap);
-        echo '<pre>';
+        dd($cevap);
+        die;
 ```
 #### Başarılı istek örnek 
 ```
@@ -159,10 +166,8 @@ Array
         );
 
         $sonuc=$sms->smsgonder1_1($data);
-        
-        echo '<pre>';
-            print_r($sonuc);
-        echo '<pre>';
+        dd($sonuc);
+        die;
 ```
 #### Başarılı istek örnek
 ```
@@ -265,6 +270,7 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
 </table>
 
 ```
+        use Netgsm\Sms\SmsSend;
         $sms=new SmsSend;
         $data['bulkid']="1311042194";//bulkid girildiğinde type 0 gönderilmelidir.
         $data['bastar']='010220231500';//bastar ve bittar girildiğinde type 2 gönderilmelidir
@@ -272,10 +278,8 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
         $data['status']='100';
         $data['type']='0';
         $sonuc=$sms->smsSorgulama($data);
-    
-        echo '<pre>';
-        print_r($sonuc);
-        echo '<pre>';
+        dd($sonuc);
+        die;
 ```  
 
 #### Başarılı istek sonuç
@@ -329,10 +333,8 @@ Array
         $data['stopdate']='080220231000';
         $data['type']=1;//type 0 gönderilirse  startdate ve stopdate gönderilmesine gerek yoktur.
         $sonuc=$sms->smsiptal($data);
-
-        echo '<pre>';
-              print_r($sonuc);
-        echo '<pre>';
+        dd($sonuc);
+        die;
 ```  
 #### Başarılı istek sonuç
 ```
@@ -360,10 +362,8 @@ Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsin
         $data['startdate']='120120230940';
         $data['stopdate']='230120231400';
         $sonuc=$islem->gelensms($data);
-        
-        echo '<pre>';
-            print_r($sonuc);
-        echo '<pre>';
+        dd($sonuc);
+        die;
 ```
 #### Başarılı istek örnek sonuç
 ```
@@ -401,10 +401,8 @@ Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama mod�
         use Netgsm\Sms\SmsSend;
         $baslik=new SmsSend;
         $sonuc=$baslik->basliksorgu();
-        
-        echo '<pre>';
-                print_r($sonuc);
-        echo '<pre>';
+        dd($sonuc);
+        die;
 ```
 #### Başarılı istek örnek sonuç
 ```
@@ -449,10 +447,8 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
         $data['number']=['553xxxxxxx','553xxxxxxx'];
         $data['tip']=2;
         $sonuc=$karaliste->karaliste($data);
-        
-        echo '<pre>';
-             print_r($sonuc);
-        echo '<pre>';
+        dd($sonuc);
+        die;
 ```  
 #### Başarılı istek örnek sonuç
 ```
@@ -488,10 +484,8 @@ Abone numaranızın kurumsal olması gereklidir
         // $data['header']='HEADERINIZ'; //TANIMILI MESAJ BAŞLIĞINIZ
         $flashsms=new SmsSend;
         $sonuc=$flashsms->flashSms($data);
-        
-        echo '<pre>';
-                print_r($sonuc);
-        echo '<pre>';
+        dd($sonuc);
+        die;
 ``` 
 #### Başarılı istek örnek sonuç
 ```
