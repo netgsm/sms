@@ -109,7 +109,7 @@ Array
 ```
 
 #### Başarısız istek örnek 
-```
+```php
 Array
 (
     [code] => 30
@@ -121,7 +121,7 @@ Array
 
 Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette gönderebilirsiniz. 
 
-```
+```php
         use Netgsm\Sms\SmsSend;
         $msGsm[0]['gsm']='553XXXXXXX';
         $msGsm[0]['message']='MESAJ METNİ 1';
@@ -137,7 +137,7 @@ Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette g
         die;
 ```
 #### Başarılı istek örnek 
-```
+```php
 Array
 (
     [code] => 00
@@ -146,7 +146,7 @@ Array
 )
 ```
 #### Başarısız istek örnek 
-```
+```php
 Array
 (
     [code] => 30
@@ -158,7 +158,7 @@ Array
 
 
 
-```
+```php
         use Netgsm\Sms\SmsSend;
         $sms=new SmsSend;
         $data=array(
@@ -175,7 +175,7 @@ Array
         die;
 ```
 #### Başarılı istek örnek
-```
+```php
 Array
 (
     [code] => 00
@@ -184,7 +184,7 @@ Array
 )
 ```
 #### Başarısız istek örnek
-```
+```php
 Array
 (
     [code] => 40
@@ -274,7 +274,7 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
 </tbody>
 </table>
 
-```
+```php
         use Netgsm\Sms\SmsSend;
         $sms=new SmsSend;
         $data['bulkid']="1311042194";//bulkid girildiğinde type 0 gönderilmelidir.
@@ -288,7 +288,7 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
 ```  
 
 #### Başarılı istek sonuç
-```
+```php
 Array
 (
     [durum] => İletilmiş olanlar
@@ -303,7 +303,7 @@ Array
 )
 ```
 #### Başarısız istek sonuç
-```
+```php
 Array
 (
     [code] => 60
@@ -330,7 +330,7 @@ Array
  
 </table>  
 
-```
+```php
         use Netgsm\Sms\SmsSend;
         $sms=new SmsSend;
         $data['bulkid']='1311176624';
@@ -342,7 +342,7 @@ Array
         die;
 ```  
 #### Başarılı istek sonuç
-```
+```php
 Array
 (
     [aciklama] => İleri zamanlı görevinizin başarılı bir şekilde iptal edilğini ifade eder.
@@ -350,7 +350,7 @@ Array
 )
 ```
 #### Başarısız istek sonuç
-```
+```php
 Array
 (
     [aciklama] => Baslangiç ve bitis tarihleri arasindaki fark en az 1 , en fazla 21 saat olmalidir.
@@ -361,7 +361,7 @@ Array
 
 Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsiniz.  
 
-```
+```php
         use Netgsm\Sms\SmsSend;	
         $islem=new SmsSend;
         $data['startdate']='120120230940';
@@ -371,7 +371,7 @@ Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsin
         die;
 ```
 #### Başarılı istek örnek sonuç
-```
+```php
 Array
 (
     [0] => Array
@@ -391,7 +391,7 @@ Array
 )
 ```
 #### Başarısız istek örnek sonuç
-```
+```php
 Array
 (
     [code] => 60
@@ -402,7 +402,7 @@ Array
 
 Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama modülüdür. 
 
-```
+```php
         use Netgsm\Sms\SmsSend;
         $baslik=new SmsSend;
         $sonuc=$baslik->basliksorgu();
@@ -410,7 +410,7 @@ Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama mod�
         die;
 ```
 #### Başarılı istek örnek sonuç
-```
+```php
 Array
 (
     [msgheader] => Array
@@ -422,7 +422,7 @@ Array
 )
 ```
 #### Başarısız istek örnek sonuç
-```
+```php
 Array
 (
     [code] => 30
@@ -446,7 +446,7 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
  
 </table>  
 
-```
+```php
         use Netgsm\Sms\SmsSend;
        	$karaliste=new SmsSend;
         $data['number']=['553xxxxxxx','553xxxxxxx'];
@@ -456,7 +456,7 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
         die;
 ```  
 #### Başarılı istek örnek sonuç
-```
+```php
 Array
 (
     [code] => OK
@@ -464,7 +464,7 @@ Array
 )
 ```
 #### Başarısız istek örnek sonuç
-```
+```php
 Array
 (
     [code] => 60
@@ -476,7 +476,7 @@ Array
 Gönderdiğiniz SMS'lerin kullanıcılarınızın cep telefonu ekranında bildirim olarak gösterilmesidir.  
 Abone numaranızın kurumsal olması gereklidir
 
-```
+```php
         use Netgsm\Sms\SmsSend;
        	$data['message']='test3';
         $data['gsm']=['553XXXXXXX'];
@@ -493,7 +493,7 @@ Abone numaranızın kurumsal olması gereklidir
         die;
 ``` 
 #### Başarılı istek örnek sonuç
-```
+```php
 Array
 (
     [aciklama] => Gönderdiğiniz SMS'inizin başarıyla sistemimize ulaştığını gösterir. 00 : Mesajınızın tarih formatına ilişkin bir hata olmadığı anlamına gelir. 123xxxxxx : Gönderilen SMSe ait ID bilgisi, Bu görevid (bulkid) niz ile mesajınızın iletim raporunu sorguyabilirsiniz.
@@ -502,7 +502,7 @@ Array
 )
 ```
 #### Başarısız istek örnek sonuç
-```
+```php
 Array
 (
     [code] => 30
