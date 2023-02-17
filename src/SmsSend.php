@@ -516,7 +516,7 @@ class SmsSend
     }
     public function smsIptal($data):array
     {
-        
+     
         if(!isset($data['startdate'])){
             $data['startdate']=null;
         }
@@ -527,7 +527,11 @@ class SmsSend
         if(!isset($data['type'])){
             $data['type']=null;
         }
+        if(!isset($data['bulkid'])){
+            $data['bulkid']=null;
+        }
        
+        
          $xmlData='<?xml version="1.0" encoding="UTF-8"?>
             <mainbody>
             <header>
@@ -554,7 +558,7 @@ class SmsSend
 		$data=[];
 
         $sonuc=array(
-            "00"=>"İleri zamanlı görevinizin başarılı bir şekilde iptal edilğini ifade eder.",
+            "00"=>"İleri zamanlı görevinizin başarılı bir şekilde iptal/guncelleme işleminin yapıldığı ifade eder.",
             "30"=>"Geçersiz kullanıcı adı , şifre veya kullanıcınızın API erişim izninin olmadığını gösterir.",
             "40"=>"API ile hesap erişim izninin olmadığını veya IP sınırlamanız olduğunu ifade eder.",
             "41"=>"Gönderdiğiniz gorevid parametresinde hata olduğunu ifade eder.",
@@ -742,7 +746,7 @@ class SmsSend
     public function karaliste($data):array
     {
         $no='';
-
+                
         if(!isset($data['number']))
         {
             $data['number']=null;
