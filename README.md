@@ -127,7 +127,7 @@ Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette g
                     array('gsm'=>'553XXXXXX','message'=>'MESAJ METNİ 1'),
                     array('gsm'=>'553XXXXXX','message'=>'MESAJ METNİ 2')
                 );
-        $data=array('startdate'=>'170220231210','stopdate'=>'170220231300','header'=>'FATIHAVCI','filter'=>0);
+        $data=array('startdate'=>'170220231210','stopdate'=>'170220231300','header'=>'BASLIGINIZ','filter'=>0);
         $sms=new SmsSend;
         $cevap=$sms->smsGonderNN($msGsm,$data);
         dd($cevap);
