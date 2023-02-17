@@ -3,7 +3,7 @@
 
 Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidir.
 
-## Contents
+## İçindekiler
 
 - [Kurulum](#Kurulum)
 - [İletişim & Destek](#destek)
