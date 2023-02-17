@@ -357,10 +357,9 @@ Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsin
 ```php
         use Netgsm\Sms\SmsSend;	
         $islem=new SmsSend;
-        $data['startdate']='120120230940';
-        $data['stopdate']='230120231400';
-        $sonuc=$islem->gelensms($data);
-        dd($sonuc);
+        $data=array('startdate'=>'120120230940','stopdate'=>'230120231400');
+        $sonuc=$islem->gelensms($data);
+        dd($sonuc);
         die;
 ```
 #### Başarılı istek örnek sonuç
