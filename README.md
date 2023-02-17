@@ -6,7 +6,7 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
 ## Contents
 
 - [Kurulum](#Kurulum)
-- [İletişim & Destek](#iletisim&Destek)
+- [İletişim & Destek](#destek)
 - [Usage](#usage)
     - [Service Methods](#service-methods)
     - [SMS Sending](#sms-sending)
@@ -26,7 +26,7 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
 - [License](#license)
 
 
-# İletişim & Destek
+# Destek
 
  Netgsm API Servisi ile alakalı tüm sorularınızı ve önerilerinizi teknikdestek@netgsm.com.tr adresine iletebilirsiniz.
 ### Supported Laravel Versions
