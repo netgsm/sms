@@ -12,6 +12,10 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
 
 Laravel 6.x, Laravel 7.x, Laravel 8.x, Laravel 9.x, 
 
+### Supported Lumen Versions
+
+Lumen 6.x, Lumen 7.x, Lumen 8.x, Lumen 9.x, 
+
 ### Supported Symfony Versions
 
 Symfony 4.x, Symfony 5.x, Symfony 6.x
@@ -76,25 +80,26 @@ https://www.netgsm.com.tr/dokuman/
 
 SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde iletebilirsiniz.
 
-```
+```php
         use Netgsm\Sms\SmsSend;
-        $data['message']='test';
-        $data['no']=['553xxxxxxx']; //$data['gsm']=['553xxxxxxx','555xxxxxxx'];
-        $data['header']="MESSAGE_BASLİK";
-        $data['filter']=0;
-        // $data['encoding']='tr';
-        //$data['startdate']='200120231600';
-        //$data['stopdate']='200120231700';
-        //$data['bayikodu']=1312;
-        //$data['appkey']='A123-F3DASD-XXXXX....';
-        
-        $sms= new SmsSend;
-        $cevap=$sms->smsGonder($data);
-        dd($cevap);
+        $data=array(
+            'message'=>'test mesajı',
+            'no'=>['553xxxxxxx','553xxxxxxx'],
+            'header'=>'MESAJ_BASLİK',
+            'filter'=>0,
+            'encoding'=>'tr',
+            'startdate'=>'170220231000',
+            'stopdate'=>'170220231200',
+            'bayikodu'=>'1312...',
+            'appkey'=>'A123-F3DASD-XXXXX....'
+        );
+        $sms= new SmsSend;
+        $cevap=$sms->smsGonder($data);
+        dd($cevap);
         die;
 ``` 
 #### Başarılı istek örnek 
-```
+```php
 Array
 (
     [code] => 00
@@ -104,7 +109,7 @@ Array
 ```
 
 #### Başarısız istek örnek 
-```
+```php
 Array
 (
     [code] => 30
@@ -116,23 +121,20 @@ Array
 
 Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette gönderebilirsiniz. 
 
-```
+```php
         use Netgsm\Sms\SmsSend;
-        $msGsm[0]['gsm']='553XXXXXXX';
-        $msGsm[0]['message']='MESAJ METNİ 1';
-        $msGsm[1]['gsm']='553XXXXXXX';
-        $msGsm[1]['message']='MESAJ METNİ 2';
-        $data['startdate']='230120230900';
-        $data['stopdate']='230120231000';
-        $data['header']="FATIHAVCI";
-        $data['filter']=0;
-        $sms=new SmsSend;
-        $cevap=$sms->smsGonderNN($msGsm,$data);
-        dd($cevap);
+        $msGsm=array(
+                    array('gsm'=>'553XXXXXX','message'=>'MESAJ METNİ 1'),
+                    array('gsm'=>'553XXXXXX','message'=>'MESAJ METNİ 2')
+                );
+        $data=array('startdate'=>'170220231210','stopdate'=>'170220231300','header'=>'BASLIGINIZ','filter'=>0);
+        $sms=new SmsSend;
+        $cevap=$sms->smsGonderNN($msGsm,$data);
+        dd($cevap);
         die;
 ```
 #### Başarılı istek örnek 
-```
+```php
 Array
 (
     [code] => 00
@@ -141,7 +143,7 @@ Array
 )
 ```
 #### Başarısız istek örnek 
-```
+```php
 Array
 (
     [code] => 30
@@ -153,7 +155,7 @@ Array
 
 
 
-```
+```php
         use Netgsm\Sms\SmsSend;
         $sms=new SmsSend;
         $data=array(
@@ -170,7 +172,7 @@ Array
         die;
 ```
 #### Başarılı istek örnek
-```
+```php
 Array
 (
     [code] => 00
@@ -179,7 +181,7 @@ Array
 )
 ```
 #### Başarısız istek örnek
-```
+```php
 Array
 (
     [code] => 40
@@ -269,21 +271,19 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
 </tbody>
 </table>
 
-```
+```php
         use Netgsm\Sms\SmsSend;
         $sms=new SmsSend;
-        $data['bulkid']="1311042194";//bulkid girildiğinde type 0 gönderilmelidir.
-        $data['bastar']='010220231500';//bastar ve bittar girildiğinde type 2 gönderilmelidir
-        $data['bittar']='070220231500';
-        $data['status']='100';
-        $data['type']='0';
+        $data=array('bulkid'=>'1311042194','bastar'=>'010220231500','bittar'=>'070220231500','status'=>'100','type'=>2);
+        //bulkid girildiğinde type 0 gönderilmelidir.type=0 girildiğinde bastar ve bittar girilmesine gerek bulunmamaktadır.
+        //bastar ve bittar girildiğinde type 2 gönderilmelidir.
         $sonuc=$sms->smsSorgulama($data);
         dd($sonuc);
         die;
 ```  
 
 #### Başarılı istek sonuç
-```
+```php
 Array
 (
     [durum] => İletilmiş olanlar
@@ -298,7 +298,7 @@ Array
 )
 ```
 #### Başarısız istek sonuç
-```
+```php
 Array
 (
     [code] => 60
@@ -325,19 +325,17 @@ Array
  
 </table>  
 
-```
-        use Netgsm\Sms\SmsSend;
+```php
         $sms=new SmsSend;
-        $data['bulkid']='1311176624';
-        $data['startdate']='080220230100';
-        $data['stopdate']='080220231000';
-        $data['type']=1;//type 0 gönderilirse  startdate ve stopdate gönderilmesine gerek yoktur.
+        $data=array('bulkid'=>'1311176624','startdate'=>'180220230100','stopdate'=>'180220231000','type'=>1);
+        //type=0 gönderilirse  startdate ve stopdate gönderilmesine gerek yoktur.
+        //type=1 gönderilirse stardate ve stopdate değerleri güncellenebilir.
         $sonuc=$sms->smsiptal($data);
         dd($sonuc);
         die;
 ```  
 #### Başarılı istek sonuç
-```
+```php
 Array
 (
     [aciklama] => İleri zamanlı görevinizin başarılı bir şekilde iptal edilğini ifade eder.
@@ -345,7 +343,7 @@ Array
 )
 ```
 #### Başarısız istek sonuç
-```
+```php
 Array
 (
     [aciklama] => Baslangiç ve bitis tarihleri arasindaki fark en az 1 , en fazla 21 saat olmalidir.
@@ -356,17 +354,16 @@ Array
 
 Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsiniz.  
 
-```
+```php
         use Netgsm\Sms\SmsSend;	
         $islem=new SmsSend;
-        $data['startdate']='120120230940';
-        $data['stopdate']='230120231400';
-        $sonuc=$islem->gelensms($data);
-        dd($sonuc);
+        $data=array('startdate'=>'120120230940','stopdate'=>'230120231400');
+        $sonuc=$islem->gelensms($data);
+        dd($sonuc);
         die;
 ```
 #### Başarılı istek örnek sonuç
-```
+```php
 Array
 (
     [0] => Array
@@ -386,7 +383,7 @@ Array
 )
 ```
 #### Başarısız istek örnek sonuç
-```
+```php
 Array
 (
     [code] => 60
@@ -397,7 +394,7 @@ Array
 
 Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama modülüdür. 
 
-```
+```php
         use Netgsm\Sms\SmsSend;
         $baslik=new SmsSend;
         $sonuc=$baslik->basliksorgu();
@@ -405,7 +402,7 @@ Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama mod�
         die;
 ```
 #### Başarılı istek örnek sonuç
-```
+```php
 Array
 (
     [msgheader] => Array
@@ -417,7 +414,7 @@ Array
 )
 ```
 #### Başarısız istek örnek sonuç
-```
+```php
 Array
 (
     [code] => 30
@@ -441,17 +438,16 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
  
 </table>  
 
-```
+```php
         use Netgsm\Sms\SmsSend;
        	$karaliste=new SmsSend;
-        $data['number']=['553xxxxxxx','553xxxxxxx'];
-        $data['tip']=2;
-        $sonuc=$karaliste->karaliste($data);
-        dd($sonuc);
+        $data=array('number'=>['553xxxxxxx','553xxxxxxx'],'tip'=>2);
+        $sonuc=$karaliste->karaliste($data);
+        dd($sonuc);
         die;
 ```  
 #### Başarılı istek örnek sonuç
-```
+```php
 Array
 (
     [code] => OK
@@ -459,7 +455,7 @@ Array
 )
 ```
 #### Başarısız istek örnek sonuç
-```
+```php
 Array
 (
     [code] => 60
@@ -469,26 +465,80 @@ Array
 ### FLASH SMS
 
 Gönderdiğiniz SMS'lerin kullanıcılarınızın cep telefonu ekranında bildirim olarak gösterilmesidir.  
-Abone numaranızın kurumsal olması gereklidir
+Abone numaranızın kurumsal olması gereklidir.
 
-```
+<table>
+<thead>
+<tr>
+<th>Parametre</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td><code>header</code></td>
+<td>Sistemde tanımlı olan mesaj başlığınızdır (gönderici adınız). En az 3, en fazla 11 karakterden oluşur.</td>
+
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>SMS metninin yer alacağı alandır.Nn sms gönderimlerinde array olarak gönderilmelidir.</td>
+
+</tr>
+<tr>
+<td><code>gsm[ ]</code></td>
+<td>SMS in gideceği numaraları temsil eder array gönderilmeli</td>
+
+</tr>
+ <tr>
+<td><code>filter/code></td>
+<td>Ticari içerikli SMS gönderimlerinde bu parametreyi kullanabilirsiniz. Ticari içerikli bireysele gönderilecek numaralar için İYS kontrollü gönderimlerde ise "11" değerini, tacire gönderilecek İYS kontrollü gönderimlerde ise "12" değerini almalıdır. null gönderildiği taktirde filtre uygulanmadan gönderilecektir.İstek yapılırken gönderilmesi zorunludur. Ticari içerikli ileti gönderimi yapmıyorsanız 0 gönderilmelidir.</td>
+
+</tr>
+ <tr>
+<td><code>appkey/code></td>
+<td>Geliştirici hesabınızdan yayınlanan uygulamanıza ait id bilgisi.</td>
+
+</tr>
+<tr>
+<td><code>encoding</code></td>
+<td>Türkçe karakter desteği isteniyorsa bu alana TR girilmeli, istenmiyorsa null olarak gönderilmelidir. SMS boyu hesabı ve ücretlendirme bu parametreye bağlı olarak değişecektir.</td>
+
+</tr>
+<tr>
+<td><code>startdate</code></td>
+<td>Gönderime başlayacağınız tarih. (ddMMyyyyHHmm) * Boş bırakılırsa mesajınız hemen gider.</td>
+
+</tr>
+<tr>
+<td><code>stopdate</code></td>
+<td>İki tarih arası gönderimlerinizde bitiş tarihi.(ddMMyyyyHHmm)* Boş bırakılırsa sistem başlangıç tarihine 21 saat ekleyerek otomatik gönderir.</td>
+
+</tr>
+
+
+</tbody>
+</table>
+
+```php
         use Netgsm\Sms\SmsSend;
-       	$data['message']='test3';
-        $data['gsm']=['553XXXXXXX'];
-        // $data['encoding']='tr';//TÜRKÇE METİN
-        // $data['startdate']='200120231600';
-        // $data['stopdate']='200120231700';
-        // $data['filter']=0;//IYS
-        // $data['bayikodu']=1312; //TANIMLI BAYİKODUNUZ
-        // $data['appkey']='hsfxa-xhytf21-....';
-        // $data['header']='HEADERINIZ'; //TANIMILI MESAJ BAŞLIĞINIZ
-        $flashsms=new SmsSend;
-        $sonuc=$flashsms->flashSms($data);
-        dd($sonuc);
+       	$data=array('message'=>'Test','gsm'=>['553xxxxxxx','553xxxxxxx'],
+                    'header'=>'312xxxxxxx',
+                    'encoding'=>'tr',
+                    'startdate'=>'170220231418',
+                    'stopdate'=>'170220231425',
+                    'filter'=>0,
+                    'bayikodu'=>132,
+                    'appkey'=>'hsfxa-xhytf21-....',
+        );
+        $islem=new SmsSend;
+        $sonuc=$islem->flashSms($data);
+        dd($sonuc);
         die;
 ``` 
 #### Başarılı istek örnek sonuç
-```
+```php
 Array
 (
     [aciklama] => Gönderdiğiniz SMS'inizin başarıyla sistemimize ulaştığını gösterir. 00 : Mesajınızın tarih formatına ilişkin bir hata olmadığı anlamına gelir. 123xxxxxx : Gönderilen SMSe ait ID bilgisi, Bu görevid (bulkid) niz ile mesajınızın iletim raporunu sorguyabilirsiniz.
@@ -497,7 +547,7 @@ Array
 )
 ```
 #### Başarısız istek örnek sonuç
-```
+```php
 Array
 (
     [code] => 30
