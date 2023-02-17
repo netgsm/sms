@@ -123,17 +123,14 @@ Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette g
 
 ```php
         use Netgsm\Sms\SmsSend;
-        $msGsm[0]['gsm']='553XXXXXXX';
-        $msGsm[0]['message']='MESAJ METNİ 1';
-        $msGsm[1]['gsm']='553XXXXXXX';
-        $msGsm[1]['message']='MESAJ METNİ 2';
-        $data['startdate']='230120230900';
-        $data['stopdate']='230120231000';
-        $data['header']="MESAJ_BASLIGINIZ";
-        $data['filter']=0;
-        $sms=new SmsSend;
-        $cevap=$sms->smsGonderNN($msGsm,$data);
-        dd($cevap);
+        $msGsm=array(
+                    array('gsm'=>'553XXXXXX','message'=>'MESAJ METNİ 1'),
+                    array('gsm'=>'553XXXXXX','message'=>'MESAJ METNİ 2')
+                );
+        $data=array('startdate'=>'170220231210','stopdate'=>'170220231300','header'=>'FATIHAVCI','filter'=>0);
+        $sms=new SmsSend;
+        $cevap=$sms->smsGonderNN($msGsm,$data);
+        dd($cevap);
         die;
 ```
 #### Başarılı istek örnek 
