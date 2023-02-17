@@ -85,7 +85,7 @@ SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde il
         $data=array(
             'message'=>'test mesajı',
             'no'=>['553xxxxxxx','553xxxxxxx'],
-            'header'=>'FATIHAVCI',
+            'header'=>'MESAJ_BASLİK',
             'filter'=>0,
             'encoding'=>'tr',
             'startdate'=>'170220231000',
@@ -99,7 +99,7 @@ SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde il
         die;
 ``` 
 #### Başarılı istek örnek 
-```
+```php
 Array
 (
     [code] => 00
