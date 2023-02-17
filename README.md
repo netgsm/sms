@@ -80,7 +80,8 @@ https://www.netgsm.com.tr/dokuman/
 
 SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde iletebilirsiniz.
 
-```
+```php
+        use Netgsm\Sms\SmsSend;
         $data=array(
             'message'=>'test mesajı',
             'no'=>['553xxxxxxx','553xxxxxxx'],
