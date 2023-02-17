@@ -441,10 +441,9 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
 ```php
         use Netgsm\Sms\SmsSend;
        	$karaliste=new SmsSend;
-        $data['number']=['553xxxxxxx','553xxxxxxx'];
-        $data['tip']=2;
-        $sonuc=$karaliste->karaliste($data);
-        dd($sonuc);
+        $data=array('number'=>['553xxxxxxx','553xxxxxxx'],'tip'=>2);
+        $sonuc=$karaliste->karaliste($data);
+        dd($sonuc);
         die;
 ```  
 #### Başarılı istek örnek sonuç
