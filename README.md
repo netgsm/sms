@@ -274,11 +274,9 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
 ```php
         use Netgsm\Sms\SmsSend;
         $sms=new SmsSend;
-        $data['bulkid']="1311042194";//bulkid girildiğinde type 0 gönderilmelidir.
-        $data['bastar']='010220231500';//bastar ve bittar girildiğinde type 2 gönderilmelidir
-        $data['bittar']='070220231500';
-        $data['status']='100';
-        $data['type']='0';
+        $data=array('bulkid'=>'1311042194','bastar'=>'010220231500','bittar'=>'070220231500','status'=>'100','type'=>2);
+        //bulkid girildiğinde type 0 gönderilmelidir.type=0 girildiğinde bastar ve bittar girilmesine gerek bulunmamaktadır.
+        //bastar ve bittar girildiğinde type 2 gönderilmelidir.
         $sonuc=$sms->smsSorgulama($data);
         dd($sonuc);
         die;
