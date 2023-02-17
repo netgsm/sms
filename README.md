@@ -472,7 +472,6 @@ Abone numaranızın kurumsal olması gereklidir.
 <tr>
 <th>Parametre</th>
 <th>Anlamı</th>
-<th>Gönderim Yöntemi</th>
 </tr>
 </thead>
 <tbody>
@@ -492,6 +491,16 @@ Abone numaranızın kurumsal olması gereklidir.
 <td>SMS in gideceği numaraları temsil eder array gönderilmeli</td>
 
 </tr>
+ <tr>
+<td><code>filter/code></td>
+<td>Ticari içerikli SMS gönderimlerinde bu parametreyi kullanabilirsiniz. Ticari içerikli bireysele gönderilecek numaralar için İYS kontrollü gönderimlerde ise "11" değerini, tacire gönderilecek İYS kontrollü gönderimlerde ise "12" değerini almalıdır. null gönderildiği taktirde filtre uygulanmadan gönderilecektir.İstek yapılırken gönderilmesi zorunludur. Ticari içerikli ileti gönderimi yapmıyorsanız 0 gönderilmelidir.</td>
+
+</tr>
+ <tr>
+<td><code>appkey/code></td>
+<td>Geliştirici hesabınızdan yayınlanan uygulamanıza ait id bilgisi.</td>
+
+</tr>
 <tr>
 <td><code>encoding</code></td>
 <td>Türkçe karakter desteği isteniyorsa bu alana TR girilmeli, istenmiyorsa null olarak gönderilmelidir. SMS boyu hesabı ve ücretlendirme bu parametreye bağlı olarak değişecektir.</td>
@@ -508,11 +517,7 @@ Abone numaranızın kurumsal olması gereklidir.
 
 </tr>
 
-<tr>
-<td><code>appkey</code></td>
-<td>Geliştirici hesabınızdan yayınlanan uygulamanıza ait id bilgisi.</td>
 
-</tr>
 </tbody>
 </table>
 
