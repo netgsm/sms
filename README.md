@@ -10,7 +10,7 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
 - [Supported](#Supported-Laravel-Versions)
 - [Döküman](#dokuman)
     - [Kurulum](#kurulum)
-    - [SMS Sending](#sms-sending)
+    - [1:n Sms Send](#1:n-Sms-Send)
        - [Available SMS Interfaces](#available-sms-interfaces)
    - [Reporting](#reporting)
        - [Available Reporting Interfaces](#available-report-interfaces)
@@ -98,7 +98,7 @@ https://www.netgsm.com.tr/dokuman/
   
 </table> 
 
-### 1:n SMS GÖNDERİMİ
+### 1:n Sms Send
 
 SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde iletebilirsiniz.
 
