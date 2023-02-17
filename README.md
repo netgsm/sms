@@ -465,22 +465,71 @@ Array
 ### FLASH SMS
 
 Gönderdiğiniz SMS'lerin kullanıcılarınızın cep telefonu ekranında bildirim olarak gösterilmesidir.  
-Abone numaranızın kurumsal olması gereklidir
+Abone numaranızın kurumsal olması gereklidir.
+
+<table>
+<thead>
+<tr>
+<th>Parametre</th>
+<th>Anlamı</th>
+<th>Gönderim Yöntemi</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td><code>header</code></td>
+<td>Sistemde tanımlı olan mesaj başlığınızdır (gönderici adınız). En az 3, en fazla 11 karakterden oluşur.</td>
+
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>SMS metninin yer alacağı alandır.Nn sms gönderimlerinde array olarak gönderilmelidir.</td>
+
+</tr>
+<tr>
+<td><code>gsm[ ]</code></td>
+<td>SMS in gideceği numaraları temsil eder array gönderilmeli</td>
+
+</tr>
+<tr>
+<td><code>encoding</code></td>
+<td>Türkçe karakter desteği isteniyorsa bu alana TR girilmeli, istenmiyorsa null olarak gönderilmelidir. SMS boyu hesabı ve ücretlendirme bu parametreye bağlı olarak değişecektir.</td>
+
+</tr>
+<tr>
+<td><code>startdate</code></td>
+<td>Gönderime başlayacağınız tarih. (ddMMyyyyHHmm) * Boş bırakılırsa mesajınız hemen gider.</td>
+
+</tr>
+<tr>
+<td><code>stopdate</code></td>
+<td>İki tarih arası gönderimlerinizde bitiş tarihi.(ddMMyyyyHHmm)* Boş bırakılırsa sistem başlangıç tarihine 21 saat ekleyerek otomatik gönderir.</td>
+
+</tr>
+
+<tr>
+<td><code>appkey</code></td>
+<td>Geliştirici hesabınızdan yayınlanan uygulamanıza ait id bilgisi.</td>
+
+</tr>
+</tbody>
+</table>
 
 ```php
         use Netgsm\Sms\SmsSend;
-       	$data['message']='test3';
-        $data['gsm']=['553XXXXXXX'];
-        // $data['encoding']='tr';//TÜRKÇE METİN
-        // $data['startdate']='200120231600';
-        // $data['stopdate']='200120231700';
-        // $data['filter']=0;//IYS
-        // $data['bayikodu']=1312; //TANIMLI BAYİKODUNUZ
-        // $data['appkey']='hsfxa-xhytf21-....';
-        // $data['header']='HEADERINIZ'; //TANIMILI MESAJ BAŞLIĞINIZ
-        $flashsms=new SmsSend;
-        $sonuc=$flashsms->flashSms($data);
-        dd($sonuc);
+       	$data=array('message'=>'Test','gsm'=>['553xxxxxxx','553xxxxxxx'],
+                    'header'=>'312xxxxxxx',
+                    'encoding'=>'tr',
+                    'startdate'=>'170220231418',
+                    'stopdate'=>'170220231425',
+                    'filter'=>0,
+                    'bayikodu'=>132,
+                    'appkey'=>'hsfxa-xhytf21-....',
+        );
+        $islem=new SmsSend;
+        $sonuc=$islem->flashSms($data);
+        dd($sonuc);
         die;
 ``` 
 #### Başarılı istek örnek sonuç
