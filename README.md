@@ -81,20 +81,20 @@ https://www.netgsm.com.tr/dokuman/
 SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde iletebilirsiniz.
 
 ```
-        use Netgsm\Sms\SmsSend;
-        $data['message']='test';
-        $data['no']=['553xxxxxxx']; //$data['gsm']=['553xxxxxxx','555xxxxxxx'];
-        $data['header']="MESSAGE_BASLİK";
-        $data['filter']=0;
-        // $data['encoding']='tr';
-        //$data['startdate']='200120231600';
-        //$data['stopdate']='200120231700';
-        //$data['bayikodu']=1312;
-        //$data['appkey']='A123-F3DASD-XXXXX....';
-        
-        $sms= new SmsSend;
-        $cevap=$sms->smsGonder($data);
-        dd($cevap);
+        $data=array(
+            'message'=>'test mesajı',
+            'no'=>['553xxxxxxx','553xxxxxxx'],
+            'header'=>'FATIHAVCI',
+            'filter'=>0,
+            'encoding'=>'tr',
+            'startdate'=>'170220231000',
+            'stopdate'=>'170220231200',
+            'bayikodu'=>'1312...',
+            'appkey'=>'A123-F3DASD-XXXXX....'
+        );
+        $sms= new SmsSend;
+        $cevap=$sms->smsGonder($data);
+        dd($cevap);
         die;
 ``` 
 #### Başarılı istek örnek 
