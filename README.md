@@ -8,7 +8,7 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
 - [Kurulum](#Kurulum)
 - [İletişim & Destek](#destek)
 - [Supported](#Supported-Laravel-Versions)
-- [Usage](#usage)
+- [Döküman](#dokuman)
     - [Service Methods](#service-methods)
     - [SMS Sending](#sms-sending)
        - [Available SMS Interfaces](#available-sms-interfaces)
