@@ -326,12 +326,10 @@ Array
 </table>  
 
 ```php
-        use Netgsm\Sms\SmsSend;
         $sms=new SmsSend;
-        $data['bulkid']='1311176624';
-        $data['startdate']='080220230100';
-        $data['stopdate']='080220231000';
-        $data['type']=1;//type 0 gönderilirse  startdate ve stopdate gönderilmesine gerek yoktur.
+        $data=array('bulkid'=>'1311176624','startdate'=>'180220230100','stopdate'=>'180220231000','type'=>1);
+        //type=0 gönderilirse  startdate ve stopdate gönderilmesine gerek yoktur.
+        //type=1 gönderilirse stardate ve stopdate değerleri güncellenebilir.
         $sonuc=$sms->smsiptal($data);
         dd($sonuc);
         die;
