@@ -5,8 +5,8 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
 
 ## Contents
 
-- [Installation](#Kurulum)
-   - [Setting up the Netgsm service](#setting-up-the-Netgsm-service)
+- [Kurulum](#Kurulum)
+- [İletişim & Destek](#İletişim & Destek)
 - [Usage](#usage)
     - [Service Methods](#service-methods)
     - [SMS Sending](#sms-sending)
