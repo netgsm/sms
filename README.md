@@ -14,7 +14,7 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
     - [n:n Sms Gönderimi](#nn-sms-gönderimi)
     - [Tekli Sms Gönderimi](#tekli̇-sms-gönderi̇mi̇)
     - [Sms Sorgulama](#sms-sorgulama)
-    - [Sms İptali](#sms-iptali)
+    - [Sms İptali](#sms-i̇ptali̇)
     - [Gelen Sms Sorgulama](#gelen-sms-sorgulama)
     - [Başlık(Gönderi̇ci̇ Adi) Sorgulama](#baslik)
     - [Kara Liste](#kara-liste)
