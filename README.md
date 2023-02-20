@@ -5,13 +5,13 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
 
 ## İçindekiler
 
-- [Kurulum](#Kurulum)
+- [Kurulum](#kurulum)
 - [İletişim & Destek](#destek)
 - [Supported](#Supported-Laravel-Versions)
 - [Döküman](#dokuman)
     - [Kurulum](#kurulum)
-    - [1:n Sms Gönderimi](#1n)
-    - [n:n Sms Gönderimi](#nn)
+    - [1:n Sms Gönderimi](#1n-sms-gönderimi)
+    - [n:n Sms Gönderimi](#nn-sms-gönderimi)
     - [Tekli Sms Gönderimi](#tekli-sms)
     - [Sms Sorgulama](#sms-sorgulama)
     - [Sms İptali](#sms-iptali)
