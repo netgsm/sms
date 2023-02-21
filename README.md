@@ -416,7 +416,7 @@ Array
 - Belirttiğiniz URL adresine yönlendirilecek veri <strong>post</strong> ile gönderilir.
 - Gönderilen post değerleri <strong>ceptel</strong> ve <strong>mesaj</strong> dır.
 
-Belirtmiş olduğunuz URL adresine aşağıdaki gibi veri gelir.  
+Belirtmiş olduğunuz URL adresine $ aşağıdaki gibi veri gelir.  
 ```php
 {
     "mesaj": "test",
@@ -426,6 +426,34 @@ Belirtmiş olduğunuz URL adresine aşağıdaki gibi veri gelir.
     "tarih": "2023-02-21 16:28:41.053"
 }
 ```
+##### Laravel kullanıyorsanız veriyi aşağıdaki gibi çekebilirsiniz
+```php
+    public function index(Request $request)
+    {
+        //
+        $request->ceptel;
+        $request->mesaj;
+        $request->aboneno;
+        $request->gorevid;
+        $request->tarih;
+    }
+
+```
+##### Symfony kullanıyorsanız veriyi aşağıdaki gibi çekebilirsiniz
+```php
+    public function index(RequestStack $requestStack)
+    {
+        $request = $requestStack->getCurrentRequest();
+        $request->request->get('ceptel');
+        $request->request->get('mesaj');
+        $request->request->get('aboneno');
+        $request->request->get('gorevid');
+        $request->request->get('tarih');
+        
+     }
+
+```
+
 ### BAŞLIK(GÖNDERİCİ ADI) SORGULAMA  
 Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama modülüdür. 
 
