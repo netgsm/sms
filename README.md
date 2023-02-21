@@ -411,13 +411,12 @@ Array
 ### GELEN SMS WEBHOOK
 
 
-### BAŞLIK(GÖNDERİCİ ADI) SORGULAMA
-<ul>
-<li>Abone numaranıza gelen SMS'leri tarafınızda belirleyeceğiniz bir URL adresine anlık olarak post ediyoruz.</li>
-<li>Bu işlemi webportaldan <strong>SMS Hizmeti / İnteraktif SMS</strong> menüsündeki <strong>URL Adresine Yönlendir Modülü</strong>e tıklayarak gerçekleştirebilirsiniz.</li>
-<li>Belirttiğiniz URL adresine yönlendirilecek veri <strong>post</strong> ile gönderilir.</li>
-<li>Gönderilen post değerleri <strong>ceptel</strong> ve <strong>mesaj</strong> dır.</li>
-</ul>
+- Abone numaranıza gelen SMS'leri tarafınızda belirleyeceğiniz bir URL adresine anlık olarak post ediyoruz.  
+- Bu işlemi webportaldan <strong>SMS Hizmeti / İnteraktif SMS</strong> menüsündeki <strong>URL Adresine Yönlendir Modülü</strong>e tıklayarak gerçekleştirebilirsiniz.
+- Belirttiğiniz URL adresine yönlendirilecek veri <strong>post</strong> ile gönderilir.
+- Gönderilen post değerleri <strong>ceptel</strong> ve <strong>mesaj</strong> dır.
+
+### BAŞLIK(GÖNDERİCİ ADI) SORGULAMA  
 Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama modülüdür. 
 
 ```php
