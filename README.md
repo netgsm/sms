@@ -446,7 +446,7 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
   <th>Parametre</th>
   <th>Anlamı</th>
   <tr>
-    <td><b> type</b> </td>
+    <td><b> tip</b> </td>
     <td>1 değeri ile Kara listeye ekleme, 2 değeri ile Kara listeden çıkarma işlemi gerçekleşir. İstek yapılırken gönderilmesi zorunludur. </td>
     
   </tr>
