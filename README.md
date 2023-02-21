@@ -16,6 +16,7 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
     - [Sms Sorgulama](#sms-sorgulama)
     - [Sms İptali](#sms-i̇ptali̇)
     - [Gelen Sms Sorgulama](#gelen-sms-sorgulama)
+    - [Gelen Sms Webhook](#gelen-sms-webhook)
     - [Başlık(Gönderi̇ci̇ Adi) Sorgulama](#başlikgönderi̇ci̇-adi-sorgulama)
     - [Kara Liste](#kara-liste)
     - [Flash Sms](#flash-sms)
@@ -407,8 +408,16 @@ Array
     [aciklama] => Arama kiterlerindeki startdate ve stopdate zaman farkının 30 günden fazla olduğunu ifade eder.
 )
 ```
-### BAŞLIK(GÖNDERİCİ ADI) SORGULAMA
+### GELEN SMS WEBHOOK
 
+
+### BAŞLIK(GÖNDERİCİ ADI) SORGULAMA
+<ul>
+<li>Abone numaranıza gelen SMS'leri tarafınızda belirleyeceğiniz bir URL adresine anlık olarak post ediyoruz.</li>
+<li>Bu işlemi webportaldan <strong>SMS Hizmeti / İnteraktif SMS</strong> menüsündeki <strong>URL Adresine Yönlendir Modülü</strong>e tıklayarak gerçekleştirebilirsiniz.</li>
+<li>Belirttiğiniz URL adresine yönlendirilecek veri <strong>post</strong> ile gönderilir.</li>
+<li>Gönderilen post değerleri <strong>ceptel</strong> ve <strong>mesaj</strong> dır.</li>
+</ul>
 Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama modülüdür. 
 
 ```php
