@@ -416,13 +416,13 @@ Array
 - Belirttiğiniz URL adresine yönlendirilecek veri <strong>post</strong> ile gönderilir.
 - Gönderilen post değerleri <strong>ceptel</strong> ve <strong>mesaj</strong> dır.
 
-Belirtmiş olduğunuz URL adresine $ aşağıdaki gibi veri gelir.  
+Belirtmiş olduğunuz URL adresine  aşağıdaki gibi veri gelir.  
 ```php
 {
     "mesaj": "test",
-    "ceptel": "55311052",
-    "aboneno": "3129116589",
-    "gorevid": "112843720",
+    "ceptel": "553xxxxxxx",
+    "aboneno": "312xxxxxxx",
+    "gorevid": "112xxx720",
     "tarih": "2023-02-21 16:28:41.053"
 }
 ```
