@@ -370,7 +370,7 @@ Array
 ```
 ### GELEN SMS SORGULAMA
 
-Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsiniz.  
+Abone numaranıza gelen SMS'leri sorgulayabilirsiniz.
 
 ```php
         use Netgsm\Sms\SmsSend;	
@@ -428,6 +428,7 @@ Belirtmiş olduğunuz URL adresine  aşağıdaki gibi veri gelir.
 ```
 ##### Laravel kullanıyorsanız veriyi aşağıdaki gibi çekebilirsiniz
 ```php
+Abone numaranıza gelen SMS'leri sorgulayabilirsiniz.
     public function index(Request $request)
     {
         //
