@@ -428,7 +428,7 @@ Belirtmiş olduğunuz URL adresine  aşağıdaki gibi veri gelir.
 ```
 ##### Laravel kullanıyorsanız veriyi aşağıdaki gibi çekebilirsiniz
 ```php
-Abone numaranıza gelen SMS'leri sorgulayabilirsiniz.
+
     public function index(Request $request)
     {
         //
