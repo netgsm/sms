@@ -441,14 +441,16 @@ Belirtmiş olduğunuz URL adresine  aşağıdaki gibi veri gelir.
 ```
 ##### Symfony kullanıyorsanız veriyi aşağıdaki gibi çekebilirsiniz
 ```php
-    public function index(RequestStack $requestStack)
+    use Symfony\Component\HttpFoundation\Request;
+    public function index(Request $request)
     {
-        $request = $requestStack->getCurrentRequest();
-        $request->request->get('ceptel');
-        $request->request->get('mesaj');
-        $request->request->get('aboneno');
-        $request->request->get('gorevid');
-        $request->request->get('tarih');
+    
+        
+        $request->get('ceptel');
+        $request->get('mesaj');
+        $request->get('aboneno');
+        $request->get('gorevid');
+        $request->get('tarih');
         
      }
 
