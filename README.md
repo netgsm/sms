@@ -310,7 +310,7 @@ Array
     [operatorcode] => 20
     [hataaciklama] => Hata Yok.
     [hatakod] => 0
-    [cepno] => 905531105200
+    [cepno] => 9055xxxxxxx
     [mesajboy] => 1
     [tarih] => 23.01.2023 09:35:00
 )
