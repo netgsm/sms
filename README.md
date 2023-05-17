@@ -11,7 +11,7 @@ Netgsm Sms paket aboneliği bulunan kullanıcılarımız için composer paketidi
  Netgsm API Servisi ile alakalı tüm sorularınızı ve önerilerinizi teknikdestek@netgsm.com.tr adresine iletebilirsiniz.
 ### Supported Laravel Versions
 
-Laravel 6.x, Laravel 7.x, Laravel 8.x, Laravel 9.x, 
+Laravel 6.x, Laravel 7.x, Laravel 8.x, Laravel 9.x, Laravel 10.x
 
 ### Supported Lumen Versions
 
