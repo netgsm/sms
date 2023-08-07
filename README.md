@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-
 
 # Laravel & Symfony Netgsm Sms Entegrasyonu
 
