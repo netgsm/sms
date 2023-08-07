@@ -659,9 +659,9 @@ class SmsSend
        
         foreach($res as $k=>$v){
             $d=explode('|',$v);
-            $pkRes[$k]['miktar']=$d[0];
-            $pkRes[$k]['birim']=$d[1];
-            $pkRes[$k]['paketismi']=$d[2];
+            $pkRes[$k]['miktar']=rtrim(ltrim($d[0]));
+            $pkRes[$k]['birim']=rtrim(ltrim($d[1]));
+            $pkRes[$k]['paketismi']=rtrim(ltrim($d[2]));
         }
         
          if($res[0]==30)
