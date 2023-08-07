@@ -32,7 +32,7 @@ class SmsSend
           $this->header=$_ENV['NETGSM_HEADER'];
       }
       else{
-          $this->password='x';
+          $this->header='x';
       }
       
       
