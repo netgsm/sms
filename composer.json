@@ -1,5 +1,5 @@
 {
-    "name": "netgsm/sms",
+    "name": "skeser/netgsm-sms",
     "description": "Netgsm Sms ",
     "type": "package",
     "license": "MIT",
