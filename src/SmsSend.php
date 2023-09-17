@@ -34,10 +34,25 @@ class SmsSend
       else{
           $this->password='x';
       }
-      
-      
-        
     }
+
+    // SETTERS : ilgili property'leri .env dosyasini kullanmadan set amaciyla.
+    public function setUsername(mixed $username): void
+    {
+        $this->username = $username;
+    }
+
+    public function setPassword(mixed $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function setHeader(mixed $header): void
+    {
+        $this->header = $header;
+    }
+
+
     public function smsSorgulama($data):array
     {
         
