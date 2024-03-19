@@ -94,7 +94,7 @@ SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde il
         $sms= new SmsSend;
         $cevap=$sms->smsGonder($data);
         dd($cevap);
-        die;
+        
 ``` 
 #### Başarılı istek örnek 
 ```php
@@ -129,7 +129,7 @@ Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette g
         $sms=new SmsSend;
         $cevap=$sms->smsGonderNN($msGsm,$data);
         dd($cevap);
-        die;
+        
 ```
 #### Başarılı istek örnek 
 ```php
@@ -167,7 +167,7 @@ Array
 
         $sonuc=$sms->smsgonder1_1($data);
         dd($sonuc);
-        die;
+       
 ```
 #### Başarılı istek örnek
 ```php
@@ -277,7 +277,7 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
         //bastar ve bittar girildiğinde type 2 gönderilmelidir.
         $sonuc=$sms->smsSorgulama($data);
         dd($sonuc);
-        die;
+       
 ```  
 
 #### Başarılı istek sonuç
@@ -330,7 +330,7 @@ Array
         //type=1 gönderilirse stardate ve stopdate değerleri güncellenebilir.
         $sonuc=$sms->smsiptal($data);
         dd($sonuc);
-        die;
+      
 ```  
 #### Başarılı istek sonuç
 ```php
@@ -358,7 +358,7 @@ Aboneliğinizde bulunan Paket - Kampanya bilgilerine bu servisten ulaşabilirsin
         $data=array('startdate'=>'120120230940','stopdate'=>'230120231400');
         $sonuc=$islem->gelensms($data);
         dd($sonuc);
-        die;
+      
 ```
 #### Başarılı istek örnek sonuç
 ```php
@@ -397,7 +397,7 @@ Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama mod�
         $baslik=new SmsSend;
         $sonuc=$baslik->basliksorgu();
         dd($sonuc);
-        die;
+        
 ```
 #### Başarılı istek örnek sonuç
 ```php
@@ -442,7 +442,7 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
         $data=array('number'=>['553xxxxxxx','553xxxxxxx'],'tip'=>2);
         $sonuc=$karaliste->karaliste($data);
         dd($sonuc);
-        die;
+       
 ```  
 #### Başarılı istek örnek sonuç
 ```php
@@ -533,7 +533,7 @@ Abone numaranızın kurumsal olması gereklidir.
         $islem=new SmsSend;
         $sonuc=$islem->flashSms($data);
         dd($sonuc);
-        die;
+      
 ``` 
 #### Başarılı istek örnek sonuç
 ```php
@@ -669,7 +669,7 @@ SMS'lerinizi 1:n yöntemiyle birden fazla numaraya aynı anda tek gönderimde il
         $sms= new SmsSend;
         $cevap=$sms->smsGonder($data);
         dd($cevap);
-        die;
+        
 ``` 
 #### Başarılı istek örnek 
 ```php
@@ -704,7 +704,7 @@ Birden fazla farklı SMS içeriğini farklı numaralara aynı anda tek pakette g
         $sms=new SmsSend;
         $cevap=$sms->smsGonderNN($msGsm,$data);
         dd($cevap);
-        die;
+       
 ```
 #### Başarılı istek örnek 
 ```php
@@ -742,7 +742,7 @@ Array
 
         $sonuc=$sms->smsgonder1_1($data);
         dd($sonuc);
-        die;
+       
 ```
 #### Başarılı istek örnek
 ```php
@@ -852,7 +852,7 @@ Gönderilen mesajların son 3 aya kadar raporlarını sorguyarak; iletim durumla
         //bastar ve bittar girildiğinde type 2 gönderilmelidir.
         $sonuc=$sms->smsSorgulama($data);
         dd($sonuc);
-        die;
+        
 ```  
 
 #### Başarılı istek sonuç
@@ -905,7 +905,7 @@ Array
         //type=1 gönderilirse stardate ve stopdate değerleri güncellenebilir.
         $sonuc=$sms->smsiptal($data);
         dd($sonuc);
-        die;
+        
 ```  
 #### Başarılı istek sonuç
 ```php
@@ -933,7 +933,7 @@ Abone numaranıza gelen SMS'leri sorgulayabilirsiniz.
         $data=array('startdate'=>'120120230940','stopdate'=>'230120231400');
         $sonuc=$islem->gelensms($data);
         dd($sonuc);
-        die;
+        
 ```
 #### Başarılı istek örnek sonuç
 ```php
@@ -1020,7 +1020,7 @@ Hesabınızda tanımlı gönderici adlarını(mesaj başlığı)  sorgulama mod�
         $baslik=new SmsSend;
         $sonuc=$baslik->basliksorgu();
         dd($sonuc);
-        die;
+       
 ```
 #### Başarılı istek örnek sonuç
 ```php
@@ -1065,7 +1065,7 @@ Blacklist olarak da bilinen SMS gönderimi istenmeyen yasaklı numaralar listeni
         $data=array('number'=>['553xxxxxxx','553xxxxxxx'],'tip'=>2);
         $sonuc=$karaliste->karaliste($data);
         dd($sonuc);
-        die;
+
 ```  
 #### Başarılı istek örnek sonuç
 ```php
@@ -1156,7 +1156,7 @@ Abone numaranızın kurumsal olması gereklidir.
         $islem=new SmsSend;
         $sonuc=$islem->flashSms($data);
         dd($sonuc);
-        die;
+        
 ``` 
 #### Başarılı istek örnek sonuç
 ```php
